@@ -47,3 +47,33 @@
 2024-01-21 19:15:46,154 INFO :: Bitmex Client successfully initialized
 2024-01-24 12:28:54,069 INFO :: Binance Futures Client successfully initialized
 2024-01-24 12:28:54,963 INFO :: Bitmex Client successfully initialized
+2024-01-24 12:51:04,507 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 12:51:04,515 INFO :: Binance Futures Client successfully initialized
+2024-01-24 12:51:05,177 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094137', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:51:05,735 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094138', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:51:05,738 INFO :: Bitmex Client successfully initialized
+2024-01-24 12:56:02,174 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 12:56:02,179 INFO :: Binance Futures Client successfully initialized
+2024-01-24 12:56:02,882 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094435', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:56:03,438 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094436', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:56:03,445 INFO :: Bitmex Client successfully initialized
+2024-01-24 12:58:58,186 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 12:58:58,194 INFO :: Binance Futures Client successfully initialized
+2024-01-24 12:58:58,863 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094611', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:58:59,367 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094612', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 12:58:59,373 INFO :: Bitmex Client successfully initialized
+2024-01-24 13:02:24,894 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 13:02:24,902 INFO :: Binance Futures Client successfully initialized
+2024-01-24 13:02:25,574 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094818', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:02:26,097 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706094818', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:02:26,102 INFO :: Bitmex Client successfully initialized
+2024-01-24 13:08:18,846 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 13:08:18,853 INFO :: Binance Futures Client successfully initialized
+2024-01-24 13:08:19,806 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095172', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:08:20,419 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095173', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:08:20,425 INFO :: Bitmex Client successfully initialized
+2024-01-24 13:11:13,345 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-24 13:11:13,353 INFO :: Binance Futures Client successfully initialized
+2024-01-24 13:11:14,175 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095346', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:11:14,884 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095347', 'name': 'HTTPError'}} (error code 400)
+2024-01-24 13:11:14,887 INFO :: Bitmex Client successfully initialized

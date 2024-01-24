@@ -1,16 +1,21 @@
 import logging
 import typing
-import pandas as pd # work with timeframes and timeseries
+from typing import *
 
+import pandas as pd # work with timeframes and timeseries
+import time
 from models import *
 logger = logging.getLogger()
 
+if TYPE_CHECKING:
+    from connectors.bitmex import BitmexClient
+    from connectors.binance_futures import BinanceFuturesClient
 
 TF_EQUIV = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400}
 
 class Startegy:
-    def __init__(self, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
-                 stop_loss: float):
+    def __init__(self, client: Union["BitmexClient", "BinanceFuturesClient"], contract: Contract, exchange: str,
+                 timeframe: str, balance_pct: float, take_profit: float, stop_loss: float, strat_name):
         self.contract = contract
         self.exchange = exchange
         self.tf = timeframe
@@ -79,10 +84,10 @@ class Startegy:
         #
 
 class TechnicalStrategy(Startegy):
-    def __init__(self, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
-                 stop_loss: float, other_params: typing.Dict):
+    def __init__(self, client, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
+                 stop_loss: float, other_params: Dict):
 
-        super.__init__(contract, exchange, timeframe, balance_pct, take_profit, stop_loss)
+        super().__init__(client, contract, exchange, timeframe, balance_pct, take_profit, stop_loss, "Technical")
 
         self._ema_fast = other_params['ema_fast']
         self._ema_slow = other_params['ema_slow']
@@ -149,9 +154,9 @@ class TechnicalStrategy(Startegy):
             return 0
 
 class BreakoutStrategy(Startegy):
-    def __init__(self, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
-                 stop_loss: float, other_params: typing.Dict):
-        super.__init__(contract, exchange, timeframe, balance_pct, take_profit, stop_loss)
+    def __init__(self, client, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
+                 stop_loss: float, other_params: Dict):
+        super().__init__(client, contract, exchange, timeframe, balance_pct, take_profit, stop_loss, "Breakout")
 
         self._min_volume = other_params['min_volume']
 
