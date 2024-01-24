@@ -60,6 +60,7 @@ class StrategyEditor(tk.Frame):
 
         self._extra_params = {
             "Technical": [
+                {"code_name": "rsi_length", "name": "RSI period", "widget": tk.Entry, "data_type": int},
                 {"code_name": "ema_fast", "name": "MACD Fast Length", "widget": tk.Entry, "data_type": int},
                 {"code_name": "ema_slow", "name": "MACD Slow Length", "widget": tk.Entry, "data_type": int},
                 {"code_name": "ema_signal", "name": "MACD Signal Length", "widget": tk.Entry, "data_type": int},
@@ -214,9 +215,11 @@ class StrategyEditor(tk.Frame):
 
             new_strategy.candles  = self._exchanges[exchange].get_historical_candles(contract, timeframe)
 
-            if len(new_strategy.candles):
+            if len(new_strategy.candles) == 0:
                 self.root.logging_frame.add_log(f"No historical data retrieved for {contract.symbol}")
                 return
+
+            new_strategy._check_indicator()
 
             self._exchanges[exchange].strategies[b_index] = new_strategy
             for param in self._base_params:
