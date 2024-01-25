@@ -77,3 +77,5 @@
 2024-01-24 13:11:14,175 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095346', 'name': 'HTTPError'}} (error code 400)
 2024-01-24 13:11:14,884 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'This request has expired - `expires` is in the past. Current time: 1706095347', 'name': 'HTTPError'}} (error code 400)
 2024-01-24 13:11:14,887 INFO :: Bitmex Client successfully initialized
+2024-01-25 20:26:46,677 INFO :: Binance Futures Client successfully initialized
+2024-01-25 20:26:47,838 INFO :: Bitmex Client successfully initialized

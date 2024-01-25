@@ -173,7 +173,7 @@ class BitmexClient:
 
         return order_status
 
-    def get_order_status(self, order_id: str, contract: Contract) -> OrderStatus:
+    def get_order_status(self, contract: Contract, order_id: str) -> OrderStatus:
 
         data = dict()
         data['symbol'] = contract.symbol
@@ -238,7 +238,8 @@ class BitmexClient:
 
                     for key, strat in self.strategies.items():
                         if strat.contract.symbol == symbol:
-                            strat.parse_trades(float(data['prices']), float(data['size']), ts)
+                            res = strat.parse_trades(float(data['prices']), float(data['size']), ts)
+                            strat.check_trade(res)
 
     def subscribe_channel(self, topic: str):
         data = dict()
@@ -250,4 +251,28 @@ class BitmexClient:
             self._ws.send(json.dumps(data))
         except Exception as e:
             logger.error("Websocket error while subscribing to %s: %s", topic, e)
+
+
+    def get_trade_size(self, contract: Contract, price: float, balance_pct: float):
+
+        balance = self.get_balances()
+        if balance is not None:
+            if 'XBt' in balance:
+                balance = balance['USDT'].wallet_balance
+            else:
+                return None
+        else:
+            return None
+
+        xbt_size = balance * balance_pct / 100
+
+        if contract.inverse:
+            contract_number = xbt_size / (contract.multiplier / price)
+        elif contract.quanto:
+            contract_number = xbt_size / (contract.multiplier * price)
+        else:
+            contract_number = xbt_size / (contract.multiplier * price)
+
+        logger.info("Bitmex current XBT balance = %s, contracts number = %s", balance, contract_number)
+        return int(contract_number)
 

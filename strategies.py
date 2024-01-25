@@ -2,6 +2,7 @@ import logging
 import typing
 from typing import *
 
+from threading import Timer
 import pandas as pd # work with timeframes and timeseries
 import time
 from models import *
@@ -16,6 +17,9 @@ TF_EQUIV = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 1440
 class Startegy:
     def __init__(self, client: Union["BitmexClient", "BinanceFuturesClient"], contract: Contract, exchange: str,
                  timeframe: str, balance_pct: float, take_profit: float, stop_loss: float, strat_name):
+
+        self.client = client
+
         self.contract = contract
         self.exchange = exchange
         self.tf = timeframe
@@ -24,10 +28,25 @@ class Startegy:
         self.take_profit = take_profit
         self.stop_loss = stop_loss
 
+        self.strat_name = strat_name
+
+        self.active_position = False
+
         self.candles: typing.List[Candle] = []
+        self.log_messages = []
+        self.trades: List[Trade] = []
+
+    def _add_log(self, msg: str):
+        logger.info("%s", msg)
+        self.log_messages.append({"log": msg, "displayed": False})
 
     def parse_trades(self, price: float, size: float, timestamp: int) -> str:
 
+
+        timestamp_diff = int(time.time() * 1000) - timestamp
+
+        if timestamp_diff >= 2000:
+            logger.warning("%s $s: %s ms of difference between the current time and the trade time, it means that there is overload", self.exchange, self.contract.symbol, timestamp_diff)
         last_candle = self.candles[-1]
 
         # Same Candle
@@ -81,7 +100,58 @@ class Startegy:
             logger.info("%s New candle for  %s %s", self.exchange, self.contract.symbol, self.tf)
 
             return "new_candle"
-        #
+
+    def _check_order_status(self, order_id):
+
+        order_status = self.client.get_order_status(self.contract, order_id)
+
+        if order_status is not None:
+
+            logger.info("%s order status: %s", self.exchange, order_status.status)
+
+            if order_status.status == "filled":
+                for trade in self.trades:
+                    if trade.order_id == order_id:
+                        trade.entry_price = order_status.avg_price
+                        break
+
+                return
+
+        t = Timer(2.0, lambda: self._check_order_status(order_id))
+        t.start()
+
+    def _open_position(self, signal_result: int):
+
+        trade_size = self.client.get_trade_size(self.contract, self.candles[-1].close, self.balance_pct)
+
+        if trade_size in None:
+            return
+
+        order_side = "buy" if signal_result == 1 else "sell"
+        position_side = "long" if signal_result == 1 else "short"
+
+        self._add_log(f"{position_side} signal on {self.contract.symbol} {self.tf}")
+
+        order_status = self.client.place_order(self.contract, "MARKET", trade_size, order_side)
+
+        if order_status is not None:
+            self._add_log(f"{order_side.capitalize()} order placed on {self.exchange} | Status: {order_status.status}")
+
+            self.active_position = True
+
+            avg_fill_price = None
+            if order_status.status == "filled":
+                avg_fill_price = order_status.avg_price
+            else:
+                t = Timer(2.0, lambda: self._check_order_status(order_status.order_id))
+                t.start()
+
+            new_trade = Trade({"time": int(time.time() * 1000), "entry_price": avg_fill_price,
+                               "contract": self.contract, "strategy": self.strat_name, "side": position_side,
+                               "status": "open", "pnl": 0, "quantity": trade_size, "entry_id": order_status.order_id})
+
+            self.trades.append(new_trade)
+
 
 class TechnicalStrategy(Startegy):
     def __init__(self, client, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
@@ -153,6 +223,15 @@ class TechnicalStrategy(Startegy):
         else:
             return 0
 
+    def check_trade(self, tick_type: str):
+
+        if tick_type == "new_candle" and self.active_position == False:
+            signal_result = self._check_indicator()
+
+            if signal_result in [-1,1]:
+                self._open_position(signal_result)
+
+
 class BreakoutStrategy(Startegy):
     def __init__(self, client, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
                  stop_loss: float, other_params: Dict):
@@ -167,5 +246,16 @@ class BreakoutStrategy(Startegy):
             return -1
         else:
             return 0
+
+    def check_trade(self, tick_type: str):
+
+        if self.active_position == False:
+            signal_result = self._check_indicator()
+
+            if signal_result in [-1,1]:
+                self._open_position(signal_result)
+
+
+
 
 
