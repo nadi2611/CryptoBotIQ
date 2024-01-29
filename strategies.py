@@ -130,7 +130,7 @@ class Startegy:
         order_side = "buy" if signal_result == 1 else "sell"
         position_side = "long" if signal_result == 1 else "short"
 
-        self._add_log(f"{position_side} signal on {self.contract.symbol} {self.tf}")
+        self._add_log(f"{position_side.capitalize()} signal on {self.contract.symbol} {self.tf}")
 
         order_status = self.client.place_order(self.contract, "MARKET", trade_size, order_side)
 

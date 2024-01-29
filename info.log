@@ -79,3 +79,13 @@
 2024-01-24 13:11:14,887 INFO :: Bitmex Client successfully initialized
 2024-01-25 20:26:46,677 INFO :: Binance Futures Client successfully initialized
 2024-01-25 20:26:47,838 INFO :: Bitmex Client successfully initialized
+2024-01-27 18:48:35,634 ERROR :: Connection error while making GET request to /fapi/v1/exchangeInfo: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v1/exchangeInfo (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1151d8950>: Failed to resolve 'testnet.binancefuture.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2024-01-27 18:48:35,636 ERROR :: Connection error while making GET request to /fapi/v2/account: HTTPSConnectionPool(host='testnet.binancefuture.com', port=443): Max retries exceeded with url: /fapi/v2/account?timestamp=1706374115635&signature=54b2c7ab1e8715078b0db5b41be140d748f4baf4d4f24ca2b3c3f808e698bc21 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1151da710>: Failed to resolve 'testnet.binancefuture.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2024-01-27 18:48:35,636 INFO :: Binance Futures Client successfully initialized
+2024-01-27 18:48:35,639 ERROR :: Connection error while making GET request to /api/v1/instrument/active: HTTPSConnectionPool(host='testnet.bitmex.com', port=443): Max retries exceeded with url: /api/v1/instrument/active (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x1151e4e50>: Failed to resolve 'testnet.bitmex.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2024-01-27 18:48:35,640 ERROR :: Connection error while making GET request to /api/v1/user/margin: HTTPSConnectionPool(host='testnet.bitmex.com', port=443): Max retries exceeded with url: /api/v1/user/margin?currency=all (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x10780dbd0>: Failed to resolve 'testnet.bitmex.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2024-01-27 18:48:35,640 INFO :: Bitmex Client successfully initialized
+2024-01-27 18:49:11,203 INFO :: Binance Futures Client successfully initialized
+2024-01-27 18:49:11,796 INFO :: Bitmex Client successfully initialized
+2024-01-29 12:54:59,974 INFO :: Binance Futures Client successfully initialized
+2024-01-29 12:55:06,546 INFO :: Bitmex Client successfully initialized

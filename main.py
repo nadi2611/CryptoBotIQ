@@ -4,7 +4,7 @@ from connectors.binance_futures import BinanceFuturesClient
 from connectors.bitmex import BitmexClient
 
 from interface.root_component import Root
-
+import configparser
 
 logger = logging.getLogger()
 
@@ -25,8 +25,19 @@ logger.addHandler(file_handler)
 
 if __name__ == '__main__':
 
-    binance = BinanceFuturesClient("4197cc87601e6fd6ea73912920fe0a24f085dc590757560ec67651e643e1e2c6", "67fa734bc9f08f8d0e5499a30529a1a1cc7386b3ed52b287db314221fae3af6b", True)
-    bitmex = BitmexClient("skpzrUOATohVu89EXatPDgnf", "wmjL4btPTWLb5kV1OQPwvzGmYeN5e6zDbadeseLGoZyGYgiF", True)
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    testnet_applied = eval(config.get('DataBase', 'TESTNET_APPLIED'))
+
+    binance_secret_key = config.get('Credentials', 'BINANCE_SECRET_KEY')
+    binance_public_key = config.get('Credentials', 'BINANCE_PUBLIC_KEY')
+
+    bitmax_secret_key = config.get('Credentials', 'BITMAX_SECRET_KEY')
+    bitmax_public_key = config.get('Credentials', 'BITMAX_PUBLIC_KEY')
+
+    binance = BinanceFuturesClient(binance_public_key, binance_secret_key, testnet_applied)
+    bitmex = BitmexClient(bitmax_public_key, bitmax_secret_key, testnet_applied)
 
     root = Root(binance, bitmex)
     root.mainloop()
