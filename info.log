@@ -89,3 +89,14 @@
 2024-01-27 18:49:11,796 INFO :: Bitmex Client successfully initialized
 2024-01-29 12:54:59,974 INFO :: Binance Futures Client successfully initialized
 2024-01-29 12:55:06,546 INFO :: Bitmex Client successfully initialized
+2024-01-29 13:22:11,534 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-29 13:30:53,172 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -1021, 'msg': 'Timestamp for this request is outside of the recvWindow.'} (error code 400)
+2024-01-29 13:33:24,044 INFO :: Binance Futures Client successfully initialized
+2024-01-29 13:33:27,864 INFO :: Bitmex Client successfully initialized
+2024-01-29 13:35:35,669 ERROR :: Error while making GET request to /fapi/v3/time: {'code': -1102, 'msg': "Mandatory parameter 'timestamp' was not sent, was empty/null, or malformed."} (error code 400)
+2024-01-29 13:37:05,861 INFO :: Binance Futures Client successfully initialized
+2024-01-29 13:37:06,868 INFO :: Bitmex Client successfully initialized
+2024-01-29 13:38:01,056 INFO :: Binance Futures Client successfully initialized
+2024-01-29 13:38:01,711 INFO :: Bitmex Client successfully initialized
+2024-01-29 13:42:57,026 INFO :: Binance Futures Client successfully initialized
+2024-01-29 13:42:58,093 INFO :: Bitmex Client successfully initialized

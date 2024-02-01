@@ -131,7 +131,11 @@ class BinanceFuturesClient:
 
     def get_balances(self) -> typing.Dict[str, Balance]:
         data = dict()
-        data['timestamp'] = int(time.time() * 1000)
+
+        response = requests.get('https://api.binance.com/api/v3/time')
+        server_time = response.json()['serverTime']
+
+        data['timestamp'] = server_time
         data['signature'] = self._generate_signature(data)
 
         balances = dict()
@@ -157,7 +161,10 @@ class BinanceFuturesClient:
         if tif is not None:
             data['timeInForce'] = tif
 
-        data['timestamp'] = int(time.time() * 1000)
+        response = requests.get('https://api.binance.com/api/v3/time')
+        server_time = response.json()['serverTime']
+
+        data['timestamp'] = server_time
         data['signature'] = self._generate_signature(data)
 
         order_status = self._make_request("POST", "/fapi/v1/order", data)
@@ -173,7 +180,10 @@ class BinanceFuturesClient:
         data['orderId'] = order_id
         data['symbol'] = contract.symbol
 
-        data['timestamp'] = int(time.time() * 1000)
+        response = requests.get('https://api.binance.com/api/v3/time')
+        server_time = response.json()['serverTime']
+
+        data['timestamp'] = server_time
         data['signature'] = self._generate_signature(data)
 
         order_status = self._make_request("DELETE", "/fapi/v1/order", data)
@@ -185,8 +195,11 @@ class BinanceFuturesClient:
 
     def get_order_status(self, contract: Contract, order_id: int) -> OrderStatus:
 
+        response = requests.get('https://api.binance.com/api/v3/time')
+        server_time = response.json()['serverTime']
+
         data = dict()
-        data['timestamp'] = int(time.time() * 1000)
+        data['timestamp'] = server_time
         data['symbol'] = contract.symbol
         data['orderId'] = order_id
         data['signature'] = self._generate_signature(data)
