@@ -34,8 +34,8 @@ class BinanceFuturesClient:
 
         self._headers = {'X-MBX-APIKEY': self._public_key}
 
-        self.contracts = self.get_contracts()
-        self.balances = self.get_balances()
+        self.contracts = self.get_contracts() # All crypto currencies that are available for trading in binance market.
+        self.balances = self.get_balances() # Assets balance in account.
 
         self.prices = dict()
         self.strategies: typing.Dict[int, typing.Union[TechnicalStrategy, BreakoutStrategy]] = dict()
