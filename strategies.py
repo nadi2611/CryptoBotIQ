@@ -66,7 +66,7 @@ class Startegy:
             for trade in self.trades:
                 if trade.status == "open" and trade.entry_price is not None:
                     self._change_tp_sl(trade)
-            
+
             return "same_candle"
         # Missing candles
 

@@ -263,7 +263,7 @@ class BinanceFuturesClient:
                 except RuntimeError as e:
                     logger.error("Error while looping through binance strategies: %s", e)
 
-            elif data['e'] == "aggTrade":
+            if data['e'] == "aggTrade":
 
                 symbol = data['s']
 

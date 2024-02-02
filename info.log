@@ -102,3 +102,338 @@
 2024-01-29 13:42:58,093 INFO :: Bitmex Client successfully initialized
 2024-02-02 15:01:00,773 INFO :: Binance Futures Client successfully initialized
 2024-02-02 15:01:01,577 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:03:03,481 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:03:04,159 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:17:11,547 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:17:12,560 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:22:27,793 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:22:29,293 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:25:39,754 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:25:41,673 ERROR :: Binance connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:25:41,673 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:25:41,673 ERROR :: error from callback <bound method BinanceFuturesClient._on_close of <connectors.binance_futures.BinanceFuturesClient object at 0x12f550450>>: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:25:41,673 ERROR :: Binance connection error: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:25:42,022 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:25:42,300 ERROR :: Bitmex connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:25:42,300 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:25:42,300 ERROR :: error from callback <bound method BitmexClient._on_close of <connectors.bitmex.BitmexClient object at 0x105535c90>>: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:25:42,300 ERROR :: Bitmex connection error: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:25:44,326 ERROR :: Binance connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:25:44,327 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:25:44,330 ERROR :: Bitmex connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:25:44,331 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:25:46,330 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:46,335 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:48,336 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:48,336 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:50,340 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:50,341 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:52,341 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:52,346 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:54,343 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:54,348 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:56,345 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:56,354 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:25:58,349 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:25:58,354 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:00,350 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:00,356 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:02,351 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:02,356 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:04,355 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:04,360 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:06,359 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:06,365 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:08,362 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:08,367 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:10,367 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:10,371 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:12,371 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:12,372 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:14,372 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:14,375 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:16,373 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:16,377 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:18,374 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:18,380 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:20,374 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:20,381 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:22,379 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:22,384 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:24,382 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:24,388 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:26,386 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:26,389 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:28,391 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:28,393 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:26:30,391 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:26:30,398 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:29:57,087 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:29:57,901 ERROR :: Binance connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:29:57,902 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:29:57,902 ERROR :: error from callback <bound method BinanceFuturesClient._on_close of <connectors.binance_futures.BinanceFuturesClient object at 0x11ee0c710>>: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:29:57,902 ERROR :: Binance connection error: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:29:58,342 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:29:58,648 ERROR :: Bitmex connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:29:58,648 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:29:58,648 ERROR :: error from callback <bound method BitmexClient._on_close of <connectors.bitmex.BitmexClient object at 0x106c36550>>: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:29:58,648 ERROR :: Bitmex connection error: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-02 18:30:00,481 ERROR :: Binance connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:30:00,481 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:30:00,680 ERROR :: Bitmex connection error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002)
+2024-02-02 18:30:00,681 ERROR :: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1002) - goodbye
+2024-02-02 18:30:02,485 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:02,685 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:04,486 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:04,687 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:06,492 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:06,691 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:08,497 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:08,692 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:10,503 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:10,694 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:12,508 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:12,699 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:14,512 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:14,700 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:16,516 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:16,703 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:18,695 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:18,890 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:20,700 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:20,956 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:22,705 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:22,959 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:24,723 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:24,972 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:26,725 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:26,984 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:28,729 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:28,986 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:30,731 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:30,991 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:32,736 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:32,992 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:34,740 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:34,998 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:36,741 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:37,003 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:38,745 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:39,007 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:40,747 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:41,012 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:42,747 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:43,016 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:44,750 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:45,019 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:46,751 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:47,021 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:48,752 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:49,024 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:50,756 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:51,025 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:52,758 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:53,029 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:54,759 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:55,032 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:56,765 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:57,034 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:30:58,770 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:30:59,037 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:00,770 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:01,042 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:02,777 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:03,045 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:04,779 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:05,050 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:06,781 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:07,052 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:08,786 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:09,056 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:10,788 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:11,060 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:12,791 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:13,061 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:14,797 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:15,062 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:16,801 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:17,063 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:18,805 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:19,068 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:20,808 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:21,071 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:22,813 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:23,075 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:24,819 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:25,076 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:26,824 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:27,077 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:28,830 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:29,082 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:30,835 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:31,088 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:32,838 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:33,091 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:34,843 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:35,097 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:36,848 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:37,102 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:38,854 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:39,106 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:40,856 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:41,109 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:42,862 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:43,115 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:44,864 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:45,117 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:47,126 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:47,211 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:50,768 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:51,016 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:52,964 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:53,116 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:54,975 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:55,121 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:56,977 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:57,126 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:31:58,980 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:31:59,129 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:00,982 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:01,130 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:02,984 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:03,139 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:04,986 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:05,143 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:06,990 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:07,144 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:08,996 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:09,145 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:11,001 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:11,146 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:13,004 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:13,147 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:15,005 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:15,147 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:17,010 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:17,151 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:19,014 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:19,152 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:21,015 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:21,169 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:23,018 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:23,187 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:25,023 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:25,191 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:27,024 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:27,193 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:29,025 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:29,198 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:31,028 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:31,201 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:33,032 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:33,204 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:35,035 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:35,210 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:37,040 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:37,211 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:39,041 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:39,216 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:41,045 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:41,218 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:43,050 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:43,221 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:45,052 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:45,238 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:47,057 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:47,392 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:49,061 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:49,393 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:51,062 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:51,400 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:53,069 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:53,406 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:55,071 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:55,409 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:57,072 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:57,414 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:32:59,076 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:32:59,415 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:01,077 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:01,419 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:03,081 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:03,420 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:05,088 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:05,422 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:07,105 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:07,428 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:09,106 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:09,430 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:11,108 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:11,434 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:13,113 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:13,437 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:15,114 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:15,441 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:17,115 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:17,445 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:19,120 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:19,447 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:21,121 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:21,452 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:23,126 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:23,453 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:25,131 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:25,455 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:27,133 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:27,459 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:29,137 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:29,460 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:31,146 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:31,470 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:33,155 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:33,475 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:35,163 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:35,485 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:37,172 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:37,492 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:39,178 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:39,497 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:41,186 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:41,501 ERROR :: Binance error in run_forever() method: socket is already opened
+2024-02-02 18:33:43,189 ERROR :: Bitmex error in run_forever() method: socket is already opened
+2024-02-02 18:33:50,412 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:33:51,043 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:33:53,051 INFO :: Websocket connected
+2024-02-02 18:33:53,052 INFO :: Bitmex connection opened
+2024-02-02 18:33:53,499 INFO :: Websocket connected
+2024-02-02 18:33:53,500 INFO :: Binance connection opened
+2024-02-02 18:46:41,641 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:46:42,657 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:46:43,233 INFO :: Websocket connected
+2024-02-02 18:46:43,233 INFO :: Bitmex connection opened
+2024-02-02 18:46:44,948 INFO :: Websocket connected
+2024-02-02 18:46:44,948 INFO :: Binance connection opened
+2024-02-02 18:50:03,364 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:50:03,816 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:50:04,570 INFO :: Websocket connected
+2024-02-02 18:50:04,570 INFO :: Binance connection opened
+2024-02-02 18:50:04,596 INFO :: Websocket connected
+2024-02-02 18:50:04,597 INFO :: Bitmex connection opened
+2024-02-02 18:51:24,431 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:51:25,632 INFO :: Websocket connected
+2024-02-02 18:51:25,632 INFO :: Binance connection opened
+2024-02-02 18:51:25,786 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:51:26,870 INFO :: Websocket connected
+2024-02-02 18:51:26,870 INFO :: Bitmex connection opened
+2024-02-02 18:55:10,289 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:55:11,170 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:55:11,823 INFO :: Websocket connected
+2024-02-02 18:55:11,823 INFO :: Binance connection opened
+2024-02-02 18:55:11,868 INFO :: Websocket connected
+2024-02-02 18:55:11,868 INFO :: Bitmex connection opened
+2024-02-02 18:59:24,258 INFO :: Binance Futures Client successfully initialized
+2024-02-02 18:59:24,866 INFO :: Bitmex Client successfully initialized
+2024-02-02 18:59:25,932 INFO :: Websocket connected
+2024-02-02 18:59:25,933 INFO :: Bitmex connection opened
+2024-02-02 18:59:26,770 INFO :: Websocket connected
+2024-02-02 18:59:26,777 INFO :: Binance connection opened
