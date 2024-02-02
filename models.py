@@ -93,6 +93,8 @@ class Contract:
             if self.inverse:
                 self.multiplier *= -1
 
+        self.exchange = exchange
+
 
 class OrderStatus:
     def __init__(self, order_info, exchange):
