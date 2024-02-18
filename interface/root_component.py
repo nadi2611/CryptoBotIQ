@@ -1,4 +1,5 @@
 import tkinter as tk
+from  tkinter.messagebox import askquestion
 import logging
 
 from connectors.bitmex import BitmexClient
@@ -22,7 +23,7 @@ class Root(tk.Tk):
         self.bitmex = bitmex
 
         self.title("Trading Bot")
-
+        self.protocol("WM_DELETE_WINDOW", self._ask_before_close)
         self.configure(bg=BG_COLOR)
 
         self._left_frame = tk.Frame(self, bg=BG_COLOR)
@@ -44,6 +45,17 @@ class Root(tk.Tk):
         self._trades_frame.pack(side=tk.TOP)
 
         self._update_ui()
+
+    def _ask_before_close(self):
+        result = askquestion("Confirmation", "Do you want to exit the Trading Bot?")
+        if result == "yes":
+            self.binance.reconnect = False
+            self.bitmex.reconnect = False
+
+            self.binance.ws.close()
+            self.bitmex.ws.close()
+
+            self.destroy()
 
     def _update_ui(self):
 
