@@ -437,3 +437,131 @@
 2024-02-02 18:59:25,933 INFO :: Bitmex connection opened
 2024-02-02 18:59:26,770 INFO :: Websocket connected
 2024-02-02 18:59:26,777 INFO :: Binance connection opened
+2024-02-17 13:17:19,727 INFO :: Binance Futures Client successfully initialized
+2024-02-17 13:17:21,190 INFO :: Bitmex Client successfully initialized
+2024-02-17 13:17:23,127 INFO :: Websocket connected
+2024-02-17 13:17:23,129 INFO :: Binance connection opened
+2024-02-17 13:17:23,716 INFO :: Websocket connected
+2024-02-17 13:17:23,716 INFO :: Bitmex connection opened
+2024-02-17 13:19:29,741 INFO :: Binance Futures Client successfully initialized
+2024-02-17 13:19:32,756 INFO :: Websocket connected
+2024-02-17 13:19:32,757 INFO :: Binance connection opened
+2024-02-17 13:19:33,013 INFO :: Bitmex Client successfully initialized
+2024-02-17 13:19:34,095 INFO :: Websocket connected
+2024-02-17 13:19:34,096 INFO :: Bitmex connection opened
+2024-02-17 13:26:19,400 INFO :: Binance Futures Client successfully initialized
+2024-02-17 13:26:20,126 INFO :: Bitmex Client successfully initialized
+2024-02-17 13:26:20,664 INFO :: Websocket connected
+2024-02-17 13:26:20,664 INFO :: Binance connection opened
+2024-02-17 13:26:21,112 INFO :: Websocket connected
+2024-02-17 13:26:21,113 INFO :: Bitmex connection opened
+2024-02-17 13:45:43,315 ERROR :: error from callback <bound method BinanceFuturesClient._on_close of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-17 13:45:43,321 ERROR :: Binance connection error: BinanceFuturesClient._on_close() takes 2 positional arguments but 4 were given
+2024-02-17 13:45:48,785 INFO :: Websocket connected
+2024-02-17 13:45:48,785 INFO :: Binance connection opened
+2024-02-17 14:22:17,408 INFO :: Binance Missing 1 candles for BTCUSDT 1m (1708172537483 1708172520000)
+2024-02-17 14:22:19,094 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:19,094 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:19,094 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:22,040 INFO :: Binance New candle for  BTCUSDT 1m
+2024-02-17 14:22:23,094 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:23,094 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:23,094 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:24,705 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:24,705 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:24,706 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:33,806 INFO :: Binance Missing 1 candles for BTCUSDT 1m (1708172554043 1708172538000)
+2024-02-17 14:22:34,637 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:34,637 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:34,637 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:36,072 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:36,072 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:36,072 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:37,120 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:37,120 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:37,120 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:38,850 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:38,851 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:38,851 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:40,266 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:40,266 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:40,266 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:40,268 INFO :: Binance New candle for  BTCUSDT 1m
+2024-02-17 14:22:41,789 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:41,789 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:41,789 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:47,734 INFO :: Binance New candle for  BTCUSDT 1m
+2024-02-17 14:22:50,121 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:50,123 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:50,123 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:51,412 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:51,412 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:51,412 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:58,247 INFO :: Binance Missing 1 candles for BTCUSDT 1m (1708172578338 1708172562000)
+2024-02-17 14:22:59,849 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:22:59,850 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:22:59,850 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:01,381 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:01,382 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:01,382 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:02,481 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:02,482 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:02,482 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:03,481 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:03,481 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:03,481 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:04,409 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:04,410 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:04,410 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:05,444 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:05,445 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:05,445 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:06,611 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:06,611 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:06,611 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:08,015 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:08,016 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:08,016 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:09,635 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:09,635 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:09,635 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:10,689 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:10,689 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:10,689 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:10,692 INFO :: Binance New candle for  BTCUSDT 1m
+2024-02-17 14:23:11,749 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:11,750 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:11,750 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:13,432 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:13,433 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:13,433 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:15,014 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:15,015 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:15,015 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:15,925 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:15,926 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:15,926 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:16,970 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:16,970 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:16,970 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:18,092 INFO :: Binance Futures current USDT balance = 15000.0, trade size = 0.003
+2024-02-17 14:23:18,092 ERROR :: error from callback <bound method BinanceFuturesClient._on_message of <connectors.binance_futures.BinanceFuturesClient object at 0x11bfb4b50>>: argument of type 'NoneType' is not iterable
+2024-02-17 14:23:18,092 ERROR :: Binance connection error: argument of type 'NoneType' is not iterable
+2024-02-18 15:46:42,778 INFO :: Binance Futures Client successfully initialized
+2024-02-18 15:46:44,296 INFO :: Websocket connected
+2024-02-18 15:46:44,297 INFO :: Binance connection opened
+2024-02-18 15:46:45,351 INFO :: Bitmex Client successfully initialized
+2024-02-18 15:46:46,492 INFO :: Websocket connected
+2024-02-18 15:46:46,494 INFO :: Bitmex connection opened
+2024-02-18 15:59:36,111 INFO :: Binance Futures Client successfully initialized
+2024-02-18 15:59:38,201 INFO :: Websocket connected
+2024-02-18 15:59:38,202 INFO :: Binance connection opened
+2024-02-18 15:59:38,205 INFO :: Bitmex Client successfully initialized
+2024-02-18 15:59:40,299 INFO :: Websocket connected
+2024-02-18 15:59:40,299 INFO :: Bitmex connection opened
+2024-02-18 16:00:28,625 INFO :: Binance Futures Client successfully initialized
+2024-02-18 16:00:29,263 INFO :: Bitmex Client successfully initialized
+2024-02-18 16:00:29,917 INFO :: Websocket connected
+2024-02-18 16:00:29,917 INFO :: Binance connection opened
+2024-02-18 16:00:30,122 INFO :: Websocket connected
+2024-02-18 16:00:30,122 INFO :: Bitmex connection opened
