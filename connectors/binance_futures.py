@@ -112,7 +112,7 @@ class BinanceFuturesClient:
         if raw_candles is not None:
             for c in raw_candles:
                 candles.append(Candle(c, interval, "binance"))
-                print(c)
+                #print(c)
 
         return candles
 
@@ -229,19 +229,19 @@ class BinanceFuturesClient:
     def _on_open(self, ws):
         logger.info("Binance connection opened")
 
-        self.subscribe_channel(list(self.contracts.values()), "bookTicker")
-        self.subscribe_channel(list(self.contracts.values()), "aggTrade") # why we couldn't subscribe to this
+        #self.subscribe_channel(list(self.contracts.values()), "bookTicker")
+        #self.subscribe_channel(list(self.contracts.values()), "aggTrade") # why we couldn't subscribe to this
 
-    def _on_close(self, ws):
+    def _on_close(self, ws, *args, **kwargs):
         logger.warning("Binance Websocket connection closed")
 
     def _on_error(self, ws, msg: str):
         logger.error("Binance connection error: %s", msg)
 
     def _on_message(self, ws, msg: str):
+        #logger.info("general")
 
         data = json.loads(msg)
-        print(data)
         if "e" in data:
             if data['e'] == "bookTicker":
 
@@ -268,6 +268,7 @@ class BinanceFuturesClient:
                     logger.error("Error while looping through binance strategies: %s", e)
 
             if data['e'] == "aggTrade":
+                #logger.info("test")
 
                 symbol = data['s']
 

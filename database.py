@@ -31,4 +31,3 @@ class WorkspaceData:
         data = self.cursor.fetchall()
 
         return data
-    
