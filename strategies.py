@@ -45,7 +45,7 @@ class Startegy:
 
         timestamp_diff = int(time.time() * 1000) - timestamp
 
-        if timestamp_diff >= 2000:
+        if timestamp_diff >= 10000:
             logger.warning("%s $s: %s ms of difference between the current time and the trade time, it means that there is overload", self.exchange, self.contract.symbol, timestamp_diff)
         last_candle = self.candles[-1]
 

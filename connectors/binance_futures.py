@@ -229,7 +229,7 @@ class BinanceFuturesClient:
     def _on_open(self, ws):
         logger.info("Binance connection opened")
 
-        #self.subscribe_channel(list(self.contracts.values()), "bookTicker")
+        self.subscribe_channel(list(self.contracts.values()), "bookTicker")
         #self.subscribe_channel(list(self.contracts.values()), "aggTrade") # why we couldn't subscribe to this
 
     def _on_close(self, ws, *args, **kwargs):
