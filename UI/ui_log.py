@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
-from interface.watch_list import WatchList
+from UI.ui_watch_list import WatchList
+import threading
 
 FONT = ("Calibri", 12, "normal")
 
@@ -36,6 +37,8 @@ class Login(tk.Frame):
         self.binance = main_interface.binance
         self.bitmex = main_interface.bitmex
         self.watch_list_opend = False
+
+        self.run_timer()
 
     def change_color_button(self, main_interface):
         main_interface.update_color()
@@ -222,3 +225,22 @@ class Login(tk.Frame):
         self.watch_list.lift()  # Raise the WatchList widget to the top
 
         self.update_logs()
+
+    def run_timer(self):
+
+        self.timer = threading.Timer(10, self.run_timer).start()
+        if self.watch_list_opend:
+            # Call your function
+            self.save_workspace()
+
+    def save_workspace(self):
+        watchlist_symbols = []
+
+        for key, value in self.watch_list.widgets['symbol'].items():
+            symbol = value.cget("text")
+            exchange = self.watch_list.widgets['exchange'][key].cget("text")
+
+            watchlist_symbols.append((symbol, exchange,))
+
+        self.watch_list.db.save("watchlist", watchlist_symbols)
+

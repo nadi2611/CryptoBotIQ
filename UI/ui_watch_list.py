@@ -2,8 +2,8 @@ import tkinter as tk
 from typing import Dict
 from models import *
 from database import WorkspaceData
+from UI.ui_scroll_frame import ScrollFrame
 
-from interface.scrollable_frame import ScrollFrame
 BOLD_FONT = ("corbel", 10, "bold")
 FONT = ("corbel", 10, "normal")
 
@@ -38,7 +38,6 @@ class WatchList(tk.Frame):
         self.bitmex_entry = self.create_entry(self, parent=self.frame, column=3)
         self.binance_entry.config(bg="white", fg="black")
         self.bitmex_entry.config(bg="white", fg="black")
-
 
         # Center the frame within its parent using the pack manager
         self.pack(expand=True, fill=tk.BOTH)
@@ -80,6 +79,7 @@ class WatchList(tk.Frame):
 
         for s in saved_symbols:
             self.add_symbol(s['symbol'], s['exchange'])
+
 
     @staticmethod
     def create_entry(self, parent, column: int):
@@ -137,8 +137,6 @@ class WatchList(tk.Frame):
             self.bitmex_entry.delete(0, tk.END)
 
     def delete_symbol(self, index :int):
-        #print("in delete_symbol")
-        #print(index)
         for i in self.headers:
             self.widgets[i][index].grid_forget()
             del self.widgets[i][index]
@@ -156,12 +154,3 @@ class WatchList(tk.Frame):
         for i in range(len(self.all_labels)):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)
 
-
-
-"""""""""
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = WatchList({}, {})
-    app.pack()
-    root.mainloop()
-"""""""""

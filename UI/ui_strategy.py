@@ -5,7 +5,7 @@ from utils import *
 from database import WorkspaceData
 import json
 
-from interface.scrollable_frame import ScrollFrame
+from UI.ui_scroll_frame import ScrollFrame
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
 
@@ -71,7 +71,7 @@ class StrategyFrame(tk.Frame):
 
         self.headers = [{"name": "Contract", "width": 12}, {"name": "Strategy","width": 12},
                         {"name": "Timeframe","width": 10},{"name": "Balance [%]", "width": 10},
-                        {"name": "Profit [%]", "width": 10}, { "name": "Stop Loss [%]", "width":  10}]
+                        {"name": "Profit [%]", "width": 10}, { "name": "stop loss [%]", "width":  10}]
 
         self.strategies = ["Technical", "Breakout"]
 
@@ -84,9 +84,9 @@ class StrategyFrame(tk.Frame):
              "options": self.strategies, "width": 15},
             {"name": "Timeframe", "widget": tk.OptionMenu, "data_type": "String", "options": self.all_timeframes,
                 "width": 8},
-            {"name": "Balance Percentage", "widget": tk.Entry, "data_type": float,  "width": 5},
-            {"name": "Take Profit", "widget": tk.Entry, "data_type": float,  "width": 5},
-            {"name": "Stop Loss", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "balance_pct", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "take_profit", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "stop_loss", "widget": tk.Entry, "data_type": float,  "width": 5},
             {"name": "Parameters", "widget": tk.Button,  "bg":  self.bg,"text": "parameters",
              "action": self.popup, "color": "darkred"},
             {"name": "Activation", "widget": tk.Button,  "data_type": float, "action": self.switch_strategy,
@@ -119,14 +119,12 @@ class StrategyFrame(tk.Frame):
             if i['name'] in ["strategy_type", "Contract", "Timeframe"]:
                     self.widgets['var_' + i['name']] = dict()
 
-
         self._load_workspace()
 
 
     def add_strategy(self):
 
         index = self.body_index
-
         for col, i in enumerate(self.params_dict):
             name = i['name']
             if i['widget'] == tk.OptionMenu:
@@ -135,11 +133,10 @@ class StrategyFrame(tk.Frame):
 
                 # set the default text
                 self.widgets["var_" + name][index].set("pick")
-
                 self.widgets[name][index] = tk.OptionMenu(self.scroll_frame.frame,
                         self.widgets["var_" + name][index], *i['options'])
                 self.widgets[name][index].config(width=i['width'], bg="white", fg="black")
-               # self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
+                self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
 
             elif i['widget'] == tk.Entry:
                 self.widgets[name][index] = tk.Entry(self.scroll_frame.frame, justify=tk.CENTER, bg="white", fg="black")
@@ -175,7 +172,7 @@ class StrategyFrame(tk.Frame):
             return
 
         #the following two parametrs help us make the window next to the paramets button
-        x, y = self.widgets["extra_params"][index].winfo_rootx(), self.widgets["extra_params"][index].winfo_rooty()
+        x, y = self.widgets["Parameters"][index].winfo_rootx(), self.widgets["Parameters"][index].winfo_rooty()
 
         self.window = tk.Toplevel(self, bg= self.bg, bd=10)
         self.window.title("Parameters")
@@ -261,7 +258,7 @@ class StrategyFrame(tk.Frame):
         strategy_selected = self.widgets["var_strategy_type"][index].get()
 
         #check if all peramerters are set , if not display an error message in log
-        for i in ["Balance Percentage", "Take Profit", "Stop Loss"]:
+        for i in ["balance_pct", "take_profit", "stop_loss"]:
             if self.widgets[i][index].get() == "":
                 self.main_interface.log_in_frame.add_log_message(f"Error: missing {i.lower()} parameter")
                 return
@@ -281,9 +278,9 @@ class StrategyFrame(tk.Frame):
         print(exchange)
         timeframe = self.widgets['var_Timeframe'][index].get()
         contract = self.exchanges[exchange].contracts[symbol]
-        balance_pct = float(self.widgets['Balance Percentage'][index].get())
-        take_profit = float(self.widgets['Take Profit'][index].get())
-        stop_loss = float(self.widgets['Stop Loss'][index].get())
+        balance_pct = float(self.widgets['balance_pct'][index].get())
+        take_profit = float(self.widgets['take_profit'][index].get())
+        stop_loss = float(self.widgets['stop_loss'][index].get())
 
         # check if the button is off Or ON
         if self.widgets['Activation'][index].cget("text") == "OFF":
@@ -300,7 +297,7 @@ class StrategyFrame(tk.Frame):
                                                 take_profit, stop_loss, self.additional_parameters[index])
 
             # Collects historical data. It is just one API call so that is ok, but be careful not to call methods
-            # that would lock the interface for too long.
+            # that would lock the UI for too long.
             # For example don't make a query to a database containing billions of rows, your interface_old would freeze.
 
             new_strategy.candles = self.exchanges[exchange].get_historical_candles(contract, timeframe)
@@ -352,11 +349,6 @@ class StrategyFrame(tk.Frame):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)
 
     def _load_workspace(self):
-
-        """
-        Add the rows and fill them with data saved in the database
-        :return:
-        """
 
         data = self.db.get("strategies")
 
