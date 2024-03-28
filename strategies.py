@@ -1,11 +1,8 @@
 import logging
 from typing import *
 import time
-
 from threading import Timer
-
 import pandas as pd
-
 from models import *
 
 if TYPE_CHECKING:  # Import the connector class names only for typing purpose (the classes aren't actually imported)
@@ -16,7 +13,6 @@ logger = logging.getLogger()
 
 # TF_EQUIV is used in parse_trades() to compare the last candle timestamp to the new trade timestamp
 TF_EQUIV = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400}
-
 
 class Strategy:
     def __init__(self, client: Union["BitmexClient", "BinanceClient"], contract: Contract, exchange: str,
@@ -339,7 +335,7 @@ class BreakoutStrategy(Strategy):
                  stop_loss: float, other_params: Dict):
         super().__init__(client, contract, exchange, timeframe, balance_pct, take_profit, stop_loss, "Breakout")
 
-        self._min_volume = other_params['min_volume']
+        self._min_volume = other_params['Minimum Volume']
 
     def _check_signal(self) -> int:
 
@@ -368,14 +364,3 @@ class BreakoutStrategy(Strategy):
 
             if signal_result in [1, -1]:
                 self._open_position(signal_result)
-
-
-
-
-
-
-
-
-
-
-
