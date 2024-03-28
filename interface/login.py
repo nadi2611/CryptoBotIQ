@@ -90,7 +90,7 @@ class Login(tk.Frame):
         for log in exchange_client.logs:
             if not log["displayed"]:
                 log["displayed"] = True
-                self.log_frame.add_log_message(log["log"])
+                self.log_in_frame.add_log_message(log["log"])
 
     def update_watch_list_prices(self, symbol, exchange_client, key):
         if symbol not in exchange_client.prices:
@@ -113,12 +113,12 @@ class Login(tk.Frame):
         # Logs
         for log in self.bitmex.logs:
             if not log['displayed']:
-                self.log_frame.add_log_message(log['log'])
+                self.log_in_frame.add_log_message(log['log'])
                 log['displayed'] = True
 
         for log in self.binance.logs:
             if not log['displayed']:
-                self.log_frame.add_log_message(log['log'])
+                self.log_in_frame.add_log_message(log['log'])
                 log['displayed'] = True
 
         # Trades and Logs
@@ -129,7 +129,7 @@ class Login(tk.Frame):
                 for b_index, strat in client.strategies.items():
                     for log in strat.logs:
                         if not log['displayed']:
-                            self.log_frame.add_log_message(log['log'])
+                            self.log_in_frame.add_log_message(log['log'])
                             log['displayed'] = True
 
                     # Update the Trades component (add a new trade, change status/PNL)
@@ -149,7 +149,7 @@ class Login(tk.Frame):
                         self.trade_frame.body_widgets['quantity_var'][trade.time].set(trade.quantity)
 
             except RuntimeError as e:
-                self.log_frame.add_log_message("Error while looping through strategies dictionary: %s", e)
+                self.log_in_frame.add_log_message("Error while looping through strategies dictionary: %s", e)
 
         # Watchlist prices
         try:
@@ -195,13 +195,13 @@ class Login(tk.Frame):
                     self.watch_list.widgets['ask_var'][key].set(price_str)
 
         except RuntimeError as e:
-            self.log_frame.add_log_message("Error while looping through watchlist dictionary: %s", e)
+            self.log_in_frame.add_log_message("Error while looping through watchlist dictionary: %s", e)
 
         self.after(1500, self._update_ui)
 
     def open_temp_frame(self, main_interface: tk.Frame, on_close=None):
         def on_window_close():
-            main_interface.log_frame.watch_list_button.config(stat=tk.NORMAL)
+            main_interface.log_in_frame.watch_list_button.config(stat=tk.NORMAL)
             self.watch_list_opend = False
             if on_close:
                 on_close()
