@@ -2,6 +2,8 @@ import tkinter as tk
 
 from strategies import TechnicalStrategy, BreakoutStrategy
 from utils import *
+from database import WorkspaceData
+import json
 
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
@@ -30,7 +32,7 @@ def open_temp_frame(main_interface: tk.Frame, message: str, bg_color: str):
 class StrategyFrame(tk.Frame):
     def __init__(self, main_interface, *args, **kwargs):
 
-
+        self.db = WorkspaceData()
 
         bitmex = kwargs.pop('bitmex')
         binance = kwargs.pop('binance')
@@ -75,10 +77,10 @@ class StrategyFrame(tk.Frame):
                 "width": 20},
             {"name": "Timeframe", "widget": tk.OptionMenu, "data_type": "String", "options": self.all_timeframes,
                 "width": 8},
-            {"name": "Balance Percentage", "widget": tk.Entry, "data_type": float,  "width": 8},
-            {"name": "Take Profit", "widget": tk.Entry, "data_type": float,  "width": 8},
-            {"name": "Stop Loss", "widget": tk.Entry, "data_type": float,  "width": 8},
-            {"name": "Parameters", "widget": tk.Button,  "bg":  self.bg,"text": "parameters",
+            {"name": "balance_pct", "widget": tk.Entry, "data_type": float,  "width": 8},
+            {"name": "take_profit", "widget": tk.Entry, "data_type": float,  "width": 8},
+            {"name": "stop_loss", "widget": tk.Entry, "data_type": float,  "width": 8},
+            {"name": "extra_params", "widget": tk.Button,  "bg":  self.bg,"text": "parameters",
              "action": self.popup, "color": "darkred"},
             {"name": "Activation", "widget": tk.Button,  "data_type": float, "action": self.switch_strategy,
                 "text": "OFF", "color": "darkred"},
@@ -109,6 +111,10 @@ class StrategyFrame(tk.Frame):
             self.widgets[i['name']] = dict()
             if i['name'] in ["strategy_type", "Contract", "Timeframe"]:
                     self.widgets['var_' + i['name']] = dict()
+
+
+        self._load_workspace()
+
 
     def add_strategy(self):
 
@@ -162,7 +168,7 @@ class StrategyFrame(tk.Frame):
             return
 
         #the following two parametrs help us make the window next to the paramets button
-        x, y = self.widgets["Parameters"][index].winfo_rootx(), self.widgets["Parameters"][index].winfo_rooty()
+        x, y = self.widgets["extra_params"][index].winfo_rootx(), self.widgets["extra_params"][index].winfo_rooty()
 
         self.window = tk.Toplevel(self, bg= self.bg, bd=10)
         self.window.title("Parameters")
@@ -248,7 +254,7 @@ class StrategyFrame(tk.Frame):
         strategy_selected = self.widgets["var_strategy_type"][index].get()
 
         #check if all peramerters are set , if not display an error message in log
-        for i in ["Balance Percentage", "Take Profit", "Stop Loss"]:
+        for i in ["balance_pct", "take_profit", "stop_loss"]:
             if self.widgets[i][index].get() == "":
                 self.main_interface.log_in_frame.add_log_message(f"Error: missing {i.lower()} parameter")
                 return
@@ -268,9 +274,9 @@ class StrategyFrame(tk.Frame):
         print(exchange)
         timeframe = self.widgets['var_Timeframe'][index].get()
         contract = self.exchanges[exchange].contracts[symbol]
-        balance_pct = float(self.widgets['Balance Percentage'][index].get())
-        take_profit = float(self.widgets['Take Profit'][index].get())
-        stop_loss = float(self.widgets['Stop Loss'][index].get())
+        balance_pct = float(self.widgets['balance_pct'][index].get())
+        take_profit = float(self.widgets['take_profit'][index].get())
+        stop_loss = float(self.widgets['stop_loss'][index].get())
 
         # check if the button is off Or ON
         if self.widgets['Activation'][index].cget("text") == "OFF":
@@ -336,3 +342,31 @@ class StrategyFrame(tk.Frame):
 
         for i in range(len(self.all_labels)):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)
+
+    def _load_workspace(self):
+
+        """
+        Add the rows and fill them with data saved in the database
+        :return:
+        """
+
+        data = self.db.get("strategies")
+
+        for row in data:
+            self.add_strategy()
+            print(row.keys())
+            b_index = self.body_index - 1  # -1 to select the row that was just added
+
+            for base_param in self.params_dict:
+                code_name = base_param['name']
+
+                if base_param['widget'] == tk.OptionMenu and row[code_name] is not None:
+                    self.widgets["var_" + code_name][b_index].set(row[code_name])
+                elif base_param['widget'] == tk.Entry and row[code_name] is not None:
+                    self.widgets[code_name][b_index].insert(tk.END, row[code_name])
+
+            extra_params = json.loads(row['extra_params'])
+
+            for param, value in extra_params.items():
+                if value is not None:
+                    self.additional_parameters[b_index][param] = value

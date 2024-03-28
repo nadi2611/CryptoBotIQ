@@ -26834,3 +26834,158 @@
 2024-03-25 20:27:40,986 INFO :: Binance order status: filled
 2024-03-25 20:27:43,845 INFO :: Stop loss for BTCUSDT 1m | Current Price = 72449.0 (Entry price was 71270.0)
 2024-03-25 20:27:44,720 INFO :: Exit order on BTCUSDT 1m placed successfully
+2024-03-28 13:01:15,945 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:01:16,602 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:01:17,241 INFO :: Websocket connected
+2024-03-28 13:01:17,241 INFO :: Bitmex connection opened
+2024-03-28 13:01:17,299 INFO :: Websocket connected
+2024-03-28 13:01:17,299 INFO :: Binance connection opened
+2024-03-28 13:01:17,299 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:06:26,562 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:06:27,127 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:06:27,706 INFO :: Websocket connected
+2024-03-28 13:06:27,706 INFO :: Bitmex connection opened
+2024-03-28 13:06:27,807 INFO :: Websocket connected
+2024-03-28 13:06:27,807 INFO :: Binance connection opened
+2024-03-28 13:06:27,809 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:07:18,126 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:07:18,799 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:07:19,262 INFO :: Websocket connected
+2024-03-28 13:07:19,262 INFO :: Bitmex connection opened
+2024-03-28 13:07:19,369 INFO :: Websocket connected
+2024-03-28 13:07:19,369 INFO :: Binance connection opened
+2024-03-28 13:07:19,370 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:09:42,865 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:09:43,345 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:09:43,789 INFO :: Websocket connected
+2024-03-28 13:09:43,789 INFO :: Bitmex connection opened
+2024-03-28 13:09:44,093 INFO :: Websocket connected
+2024-03-28 13:09:44,093 INFO :: Binance connection opened
+2024-03-28 13:09:44,094 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:11:50,494 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:11:50,952 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:11:51,411 INFO :: Websocket connected
+2024-03-28 13:11:51,411 INFO :: Bitmex connection opened
+2024-03-28 13:11:51,787 INFO :: Websocket connected
+2024-03-28 13:11:51,787 INFO :: Binance connection opened
+2024-03-28 13:11:51,787 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:12:11,342 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:12:12,029 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:12:12,477 INFO :: Websocket connected
+2024-03-28 13:12:12,477 INFO :: Bitmex connection opened
+2024-03-28 13:12:12,565 INFO :: Websocket connected
+2024-03-28 13:12:12,566 INFO :: Binance connection opened
+2024-03-28 13:12:12,566 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:13:50,591 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:13:51,209 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:13:51,648 INFO :: Websocket connected
+2024-03-28 13:13:51,648 INFO :: Bitmex connection opened
+2024-03-28 13:13:52,271 INFO :: Websocket connected
+2024-03-28 13:13:52,318 INFO :: Binance connection opened
+2024-03-28 13:13:52,333 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:15:18,897 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:15:19,336 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:15:19,789 INFO :: Websocket connected
+2024-03-28 13:15:19,789 INFO :: Bitmex connection opened
+2024-03-28 13:15:20,533 INFO :: Websocket connected
+2024-03-28 13:15:20,555 INFO :: Binance connection opened
+2024-03-28 13:15:20,556 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:17:14,956 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:17:15,672 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:17:16,172 INFO :: Websocket connected
+2024-03-28 13:17:16,172 INFO :: Bitmex connection opened
+2024-03-28 13:17:16,354 INFO :: Websocket connected
+2024-03-28 13:17:16,354 INFO :: Binance connection opened
+2024-03-28 13:17:16,354 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:20:08,795 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:20:09,260 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:20:09,743 INFO :: Websocket connected
+2024-03-28 13:20:09,743 INFO :: Bitmex connection opened
+2024-03-28 13:20:10,053 INFO :: Websocket connected
+2024-03-28 13:20:10,053 INFO :: Binance connection opened
+2024-03-28 13:20:10,053 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:21:58,736 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:21:59,220 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:21:59,690 INFO :: Websocket connected
+2024-03-28 13:21:59,690 INFO :: Bitmex connection opened
+2024-03-28 13:22:00,038 INFO :: Websocket connected
+2024-03-28 13:22:00,038 INFO :: Binance connection opened
+2024-03-28 13:22:00,038 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:22:29,263 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:22:41,787 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:22:43,168 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:22:43,321 INFO :: Websocket connected
+2024-03-28 13:22:43,321 INFO :: Binance connection opened
+2024-03-28 13:22:43,322 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:22:44,579 INFO :: Websocket connected
+2024-03-28 13:22:44,579 INFO :: Bitmex connection opened
+2024-03-28 13:22:58,041 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:22:58,924 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:22:59,310 INFO :: Websocket connected
+2024-03-28 13:22:59,310 INFO :: Binance connection opened
+2024-03-28 13:22:59,311 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:22:59,580 INFO :: Websocket connected
+2024-03-28 13:22:59,580 INFO :: Bitmex connection opened
+2024-03-28 13:32:31,156 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:32:31,648 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:32:32,094 INFO :: Websocket connected
+2024-03-28 13:32:32,094 INFO :: Bitmex connection opened
+2024-03-28 13:32:32,490 INFO :: Websocket connected
+2024-03-28 13:32:32,490 INFO :: Binance connection opened
+2024-03-28 13:32:32,491 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:32:54,247 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:32:54,670 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:32:55,102 INFO :: Websocket connected
+2024-03-28 13:32:55,102 INFO :: Bitmex connection opened
+2024-03-28 13:32:55,472 INFO :: Websocket connected
+2024-03-28 13:32:55,472 INFO :: Binance connection opened
+2024-03-28 13:32:55,472 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:34:25,734 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:34:26,444 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:34:26,887 INFO :: Websocket connected
+2024-03-28 13:34:26,887 INFO :: Bitmex connection opened
+2024-03-28 13:34:27,321 INFO :: Websocket connected
+2024-03-28 13:34:27,321 INFO :: Binance connection opened
+2024-03-28 13:34:27,321 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:34:43,444 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:34:43,882 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:34:44,323 INFO :: Websocket connected
+2024-03-28 13:34:44,323 INFO :: Bitmex connection opened
+2024-03-28 13:34:44,678 INFO :: Websocket connected
+2024-03-28 13:34:44,678 INFO :: Binance connection opened
+2024-03-28 13:34:44,678 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:36:24,552 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:36:25,048 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:36:25,483 INFO :: Websocket connected
+2024-03-28 13:36:25,484 INFO :: Bitmex connection opened
+2024-03-28 13:36:26,354 INFO :: Websocket connected
+2024-03-28 13:36:26,368 INFO :: Binance connection opened
+2024-03-28 13:36:26,383 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:36:47,596 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:36:48,051 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:36:48,513 INFO :: Websocket connected
+2024-03-28 13:36:48,513 INFO :: Bitmex connection opened
+2024-03-28 13:36:48,835 INFO :: Websocket connected
+2024-03-28 13:36:48,835 INFO :: Binance connection opened
+2024-03-28 13:36:48,835 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:38:49,819 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:38:50,384 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:38:50,873 INFO :: Websocket connected
+2024-03-28 13:38:50,873 INFO :: Bitmex connection opened
+2024-03-28 13:38:51,152 INFO :: Websocket connected
+2024-03-28 13:38:51,152 INFO :: Binance connection opened
+2024-03-28 13:38:51,152 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:41:18,210 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:41:19,085 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:41:19,528 INFO :: Websocket connected
+2024-03-28 13:41:19,528 INFO :: Binance connection opened
+2024-03-28 13:41:19,533 INFO :: Websocket connected
+2024-03-28 13:41:19,534 INFO :: Bitmex connection opened
+2024-03-28 13:41:19,534 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:42:49,902 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:42:50,587 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:42:51,041 INFO :: Websocket connected
+2024-03-28 13:42:51,041 INFO :: Bitmex connection opened
+2024-03-28 13:42:51,170 INFO :: Websocket connected
+2024-03-28 13:42:51,170 INFO :: Binance connection opened
+2024-03-28 13:42:51,170 INFO :: Binance: subscribing to: btcusdt@bookTicker

@@ -6,6 +6,8 @@ from interface.Trading import TradingFrame
 from interface.login import Login
 from interface.watch_list import WatchList
 from interface.strategy import StrategyFrame
+import json
+
 class interface(tk.Tk):
     def __init__(self, bitmex: BitmexClient, binance: BinanceClient):
             super().__init__()
@@ -26,6 +28,16 @@ class interface(tk.Tk):
             # Configure column weights
             self.grid_columnconfigure(0, weight=1)
             self.grid_columnconfigure(1, weight=1)
+
+            # Create the menu, sub menu and menu commands
+            # You can use the menu when you don't want to overload the interface_old with too many buttons
+
+            self.main_menu = tk.Menu(self)
+            self.configure(menu=self.main_menu)
+
+            self.workspace_menu = tk.Menu(self.main_menu, tearoff=False)
+            self.main_menu.add_cascade(label="Workspace", menu=self.workspace_menu)
+            self.workspace_menu.add_command(label="Save workspace", command=self._save_workspace)
 
             self.left_frame = tk.Frame(self, bg=self.bg_color)
             self.left_frame.grid(row=0, column=0, sticky="nsew")
@@ -237,5 +249,56 @@ class interface(tk.Tk):
             self.log_in_frame.add_log_message("Error while looping through watchlist dictionary: %s", e)
 
         self.after(1500, self._update_ui)
+    def _save_workspace(self):
+
+        """
+        Collect the current data on the interface_old and saves it to the SQLite database to avoid setting up everything
+        again everytime you open the program.
+        Triggered from a Menu command.
+        :return:
+        """
+
+        # Watchlist
+
+        watchlist_symbols = []
+
+        for key, value in self.watch_list.widgets['symbol'].items():
+            symbol = value.cget("text")
+            exchange = self.watch_list.widgets['exchange'][key].cget("text")
+
+            watchlist_symbols.append((symbol, exchange,))
+
+        self.watch_list.db.save("watchlist", watchlist_symbols)
+
+        # Strategies
+
+        strategies = []
+
+        strat_widgets = self.Strategy_frame.widgets
+
+        for b_index in strat_widgets['Contract']:  # Loops through the rows of a column (not necessarily the 'contract' one
+
+            strategy_type = strat_widgets['var_strategy_type'][b_index].get()
+            contract = strat_widgets['var_Contract'][b_index].get()
+            timeframe = strat_widgets['var_Timeframe'][b_index].get()
+            balance_pct = strat_widgets['balance_pct'][b_index].get()
+            take_profit = strat_widgets['take_profit'][b_index].get()
+            stop_loss = strat_widgets['stop_loss'][b_index].get()
+
+            # Extra parameters are all saved in one column as a JSON string because they change based on the strategy
+
+            extra_params = dict()
+
+            for param in self.Strategy_frame.extra_params_dict[strategy_type]:
+                code_name = param['code_name']
+
+                extra_params[code_name] = self.Strategy_frame.additional_parameters[b_index][code_name]
+
+            strategies.append((strategy_type, contract, timeframe, balance_pct, take_profit, stop_loss,
+                               json.dumps(extra_params),))
+
+        self.Strategy_frame.db.save("strategies", strategies)
+
+        self.log_in_frame.add_log_message("Workspace saved")
 
 

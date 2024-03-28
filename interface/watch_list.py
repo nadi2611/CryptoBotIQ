@@ -1,6 +1,7 @@
 import tkinter as tk
 from typing import Dict
 from models import *
+from database import WorkspaceData
 
 BOLD_FONT = ("corbel", 10, "bold")
 FONT = ("corbel", 10, "normal")
@@ -12,11 +13,14 @@ class WatchList(tk.Frame):
 
         self.bg: str = kwargs.pop('bg_color')
         self.fg: str = kwargs.pop('fg_color')
+
         super().__init__(*args, **kwargs)
+
         self.config(bg=self.bg)
         self.binance_keys = list(binance_contracts.keys())
         self.bitmex_keys = list(bitmex_contracts.keys())
 
+        self.db = WorkspaceData()
 
         self.frame = tk.Frame(self, bg=self.bg)
         self.frame.pack(side=tk.TOP)
@@ -63,6 +67,11 @@ class WatchList(tk.Frame):
             ('bid', str, 3),
             ('ask', str, 4),
         ]
+
+        saved_symbols = self.db.get("watchlist")
+
+        for s in saved_symbols:
+            self.add_symbol(s['symbol'], s['exchange'])
 
     @staticmethod
     def create_entry(self, parent, column: int):
