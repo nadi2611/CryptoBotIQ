@@ -2,6 +2,9 @@ import tkinter as tk
 
 from strategies import TechnicalStrategy, BreakoutStrategy
 from utils import *
+from database import WorkspaceData
+import json
+
 from interface.scrollable_frame import ScrollFrame
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
@@ -29,6 +32,8 @@ def open_temp_frame(main_interface: tk.Frame, message: str, bg_color: str):
 
 class StrategyFrame(tk.Frame):
     def __init__(self, main_interface, *args, **kwargs):
+
+        self.db = WorkspaceData()
 
         bitmex = kwargs.pop('bitmex')
         binance = kwargs.pop('binance')
@@ -114,6 +119,10 @@ class StrategyFrame(tk.Frame):
             if i['name'] in ["strategy_type", "Contract", "Timeframe"]:
                     self.widgets['var_' + i['name']] = dict()
 
+
+        self._load_workspace()
+
+
     def add_strategy(self):
 
         index = self.body_index
@@ -166,7 +175,7 @@ class StrategyFrame(tk.Frame):
             return
 
         #the following two parametrs help us make the window next to the paramets button
-        x, y = self.widgets["Parameters"][index].winfo_rootx(), self.widgets["Parameters"][index].winfo_rooty()
+        x, y = self.widgets["extra_params"][index].winfo_rootx(), self.widgets["extra_params"][index].winfo_rooty()
 
         self.window = tk.Toplevel(self, bg= self.bg, bd=10)
         self.window.title("Parameters")
@@ -341,3 +350,31 @@ class StrategyFrame(tk.Frame):
 
         for i in range(len(self.all_labels)):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)
+
+    def _load_workspace(self):
+
+        """
+        Add the rows and fill them with data saved in the database
+        :return:
+        """
+
+        data = self.db.get("strategies")
+
+        for row in data:
+            self.add_strategy()
+            print(row.keys())
+            b_index = self.body_index - 1  # -1 to select the row that was just added
+
+            for base_param in self.params_dict:
+                code_name = base_param['name']
+
+                if base_param['widget'] == tk.OptionMenu and row[code_name] is not None:
+                    self.widgets["var_" + code_name][b_index].set(row[code_name])
+                elif base_param['widget'] == tk.Entry and row[code_name] is not None:
+                    self.widgets[code_name][b_index].insert(tk.END, row[code_name])
+
+            extra_params = json.loads(row['extra_params'])
+
+            for param, value in extra_params.items():
+                if value is not None:
+                    self.additional_parameters[b_index][param] = value
