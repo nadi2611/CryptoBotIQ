@@ -1,4 +1,6 @@
 import tkinter as tk
+import threading
+from tkinter.messagebox import askquestion
 
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
@@ -18,7 +20,10 @@ class interface(tk.Tk):
             self.bg_color = "Black"
             self.fg_color = "White"
             self.color_button_text = "Light Mode"
-            self.title("trading")
+
+            self.title("Trading Bot")
+            self.protocol("WM_DELETE_WINDOW", self._proper_close)
+
             self.config(bg=self.bg_color)
 
             # Configure row weights
@@ -32,12 +37,12 @@ class interface(tk.Tk):
             # Create the menu, sub menu and menu commands
             # You can use the menu when you don't want to overload the interface_old with too many buttons
 
-            self.main_menu = tk.Menu(self)
-            self.configure(menu=self.main_menu)
+            #self.main_menu = tk.Menu(self)
+            #self.configure(menu=self.main_menu)
 
-            self.workspace_menu = tk.Menu(self.main_menu, tearoff=False)
-            self.main_menu.add_cascade(label="Workspace", menu=self.workspace_menu)
-            self.workspace_menu.add_command(label="Save workspace", command=self._save_workspace)
+            #self.workspace_menu = tk.Menu(self.main_menu, tearoff=False)
+            #self.main_menu.add_cascade(label="Workspace", menu=self.workspace_menu)
+            #self.workspace_menu.add_command(label="Save workspace", command=self._save_workspace)
 
             self.left_frame = tk.Frame(self, bg=self.bg_color)
             self.left_frame.grid(row=0, column=0, sticky="nsew")
@@ -77,6 +82,39 @@ class interface(tk.Tk):
             self.update_logs()
 
             self._update_ui()  # Starts the infinite interface_old update loop
+
+            self._run_timer()
+
+
+    def _proper_close(self):
+
+        """
+        Triggered when the user click on the Close button of the interface_old.
+        This lets you have control over what's happening just before closing the interface_old.
+        :return:
+        """
+
+        result = askquestion("Confirmation", "Do you really want to exit the application?")
+        if result == "yes":
+            self.binance.reconnect = False  # Avoids the infinite reconnect loop in _start_ws()
+            self.bitmex.reconnect = False
+            self.binance.ws.close()
+            self.bitmex.ws.close()
+
+            self._stop_timer()
+
+            self.destroy()  # Destroys the UI and terminates the program as no other thread is running
+    def _run_timer(self):
+
+        self.timer = threading.Timer(10, self._run_timer).start()
+
+        # Call your function
+        self._save_workspace()
+
+    def _stop_timer(self):
+        # Check if the timer is running
+        if self.timer and self.timer.is_alive():
+            self.timer.cancel()  # Stop the timer
 
 
     def  update_color(self):

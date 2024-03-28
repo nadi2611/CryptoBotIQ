@@ -26989,3 +26989,74 @@
 2024-03-28 13:42:51,170 INFO :: Websocket connected
 2024-03-28 13:42:51,170 INFO :: Binance connection opened
 2024-03-28 13:42:51,170 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:47:09,674 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:47:10,723 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:47:10,991 INFO :: Websocket connected
+2024-03-28 13:47:10,991 INFO :: Binance connection opened
+2024-03-28 13:47:10,992 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 13:47:11,180 INFO :: Websocket connected
+2024-03-28 13:47:11,180 INFO :: Bitmex connection opened
+2024-03-28 13:48:39,797 INFO :: Binance Futures Client successfully initialized
+2024-03-28 13:48:40,559 INFO :: Bitmex Client successfully initialized
+2024-03-28 13:48:41,019 INFO :: Websocket connected
+2024-03-28 13:48:41,020 INFO :: Bitmex connection opened
+2024-03-28 13:48:41,042 INFO :: Websocket connected
+2024-03-28 13:48:41,042 INFO :: Binance connection opened
+2024-03-28 13:48:41,042 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 17:43:50,777 INFO :: Binance Futures Client successfully initialized
+2024-03-28 17:43:52,123 INFO :: Bitmex Client successfully initialized
+2024-03-28 17:43:52,324 INFO :: Websocket connected
+2024-03-28 17:43:52,324 INFO :: Binance connection opened
+2024-03-28 17:43:52,325 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 17:43:52,752 INFO :: Websocket connected
+2024-03-28 17:43:52,752 INFO :: Bitmex connection opened
+2024-03-28 17:50:30,316 INFO :: Binance Futures Client successfully initialized
+2024-03-28 17:50:31,425 INFO :: Bitmex Client successfully initialized
+2024-03-28 17:50:31,764 INFO :: Websocket connected
+2024-03-28 17:50:31,764 INFO :: Binance connection opened
+2024-03-28 17:50:31,764 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 17:50:31,853 INFO :: Websocket connected
+2024-03-28 17:50:31,853 INFO :: Bitmex connection opened
+2024-03-28 17:51:07,894 INFO :: Binance Futures Client successfully initialized
+2024-03-28 17:51:08,536 INFO :: Bitmex Client successfully initialized
+2024-03-28 17:51:09,043 INFO :: Websocket connected
+2024-03-28 17:51:09,043 INFO :: Bitmex connection opened
+2024-03-28 17:51:09,151 INFO :: Websocket connected
+2024-03-28 17:51:09,152 INFO :: Binance connection opened
+2024-03-28 17:51:09,152 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 17:52:40,456 INFO :: Binance Futures Client successfully initialized
+2024-03-28 17:52:41,212 INFO :: Bitmex Client successfully initialized
+2024-03-28 17:52:41,656 INFO :: Websocket connected
+2024-03-28 17:52:41,657 INFO :: Bitmex connection opened
+2024-03-28 17:52:41,905 INFO :: Websocket connected
+2024-03-28 17:52:41,905 INFO :: Binance connection opened
+2024-03-28 17:52:41,905 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 17:53:18,940 INFO :: Binance Futures Client successfully initialized
+2024-03-28 17:53:19,424 INFO :: Bitmex Client successfully initialized
+2024-03-28 17:53:19,886 INFO :: Websocket connected
+2024-03-28 17:53:19,886 INFO :: Bitmex connection opened
+2024-03-28 17:53:20,127 INFO :: Websocket connected
+2024-03-28 17:53:20,127 INFO :: Binance connection opened
+2024-03-28 17:53:20,127 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 18:00:50,950 INFO :: Binance Futures Client successfully initialized
+2024-03-28 18:00:51,564 INFO :: Bitmex Client successfully initialized
+2024-03-28 18:00:52,065 INFO :: Websocket connected
+2024-03-28 18:00:52,065 INFO :: Bitmex connection opened
+2024-03-28 18:00:52,389 INFO :: Websocket connected
+2024-03-28 18:00:52,390 INFO :: Binance connection opened
+2024-03-28 18:00:52,390 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 18:01:28,742 ERROR :: error from callback <bound method BinanceClient._on_close of <connectors.binance.BinanceClient object at 0x000001BFB9A0C310>>: BinanceClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:01:28,744 ERROR :: Binance connection error: BinanceClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:01:28,834 ERROR :: error from callback <bound method BitmexClient._on_close of <connectors.bitmex.BitmexClient object at 0x000001BFB99FE500>>: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:01:28,835 ERROR :: Bitmex connection error: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:02:10,107 INFO :: Binance Futures Client successfully initialized
+2024-03-28 18:02:10,802 INFO :: Bitmex Client successfully initialized
+2024-03-28 18:02:11,328 INFO :: Websocket connected
+2024-03-28 18:02:11,328 INFO :: Bitmex connection opened
+2024-03-28 18:02:12,009 INFO :: Websocket connected
+2024-03-28 18:02:12,026 INFO :: Binance connection opened
+2024-03-28 18:02:12,057 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2024-03-28 18:02:17,810 ERROR :: error from callback <bound method BinanceClient._on_close of <connectors.binance.BinanceClient object at 0x000001C85C1C3CA0>>: BinanceClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:02:17,810 ERROR :: Binance connection error: BinanceClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:02:17,886 ERROR :: error from callback <bound method BitmexClient._on_close of <connectors.bitmex.BitmexClient object at 0x000001C85C1C3C70>>: BitmexClient._on_close() takes 2 positional arguments but 4 were given
+2024-03-28 18:02:17,887 ERROR :: Bitmex connection error: BitmexClient._on_close() takes 2 positional arguments but 4 were given
