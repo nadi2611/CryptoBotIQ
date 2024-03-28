@@ -13,7 +13,7 @@ from interface_old.trades_component import TradesWatch
 from interface_old.strategy_component import StrategyEditor
 
 
-logger = logging.getLogger()  # This will be the same logger object as the one configured in main.py
+logger = logging.getLogger()  # This will be the same logger object as the one configured in ui_main.py
 
 
 class Root(tk.Tk):

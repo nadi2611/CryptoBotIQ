@@ -3,7 +3,7 @@ import logging
 from connectors.binance import BinanceClient
 from connectors.bitmex import BitmexClient
 
-from interface.interface_main import interface
+from UI.ui_main import interface
 import configparser
 
 logger = logging.getLogger()
