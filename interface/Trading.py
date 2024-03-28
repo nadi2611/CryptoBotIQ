@@ -1,6 +1,6 @@
 import tkinter as tk
 from models import Trade
-from UI.ui_scroll_frame import ScrollFrame
+from interface.scrollable_frame import ScrollFrame
 import datetime
 
 BOLD_FONT = ("Calibri", 16, "bold")

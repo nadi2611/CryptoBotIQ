@@ -1,7 +1,7 @@
 import tkinter as tk
 from typing import Dict
 from models import *
-from UI.ui_scroll_frame import ScrollFrame
+from interface.scrollable_frame import ScrollFrame
 BOLD_FONT = ("corbel", 10, "bold")
 FONT = ("corbel", 10, "normal")
 

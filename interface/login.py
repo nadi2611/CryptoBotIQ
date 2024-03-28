@@ -1,6 +1,6 @@
 import tkinter as tk
 import time
-from UI.ui_watchlist import WatchList
+from interface.watch_list import WatchList
 
 FONT = ("Calibri", 12, "normal")
 
@@ -9,7 +9,7 @@ FONT = ("Calibri", 12, "normal")
 **kwargs - to pass key words arguments - like bg
 """""""""
 
-class LogFrame(tk.Frame):
+class Login(tk.Frame):
     def __init__(self, main_interface, *args, **kwargs):
         self.bg: str = kwargs.pop('bg_color')
         self.fg :str= kwargs.pop('fg_color')

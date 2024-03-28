@@ -2,7 +2,7 @@ import tkinter as tk
 
 from strategies import TechnicalStrategy, BreakoutStrategy
 from utils import *
-from UI.ui_scroll_frame import ScrollFrame
+from interface.scrollable_frame import ScrollFrame
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
 
@@ -162,7 +162,7 @@ class StrategyFrame(tk.Frame):
         if self.widgets["var_strategy_type"][index].get() == "pick":
             message = "Error: didn't pick in Statege Type "
             open_temp_frame(self.main_interface, message, bg_color="grey")
-            self.main_interface.log_frame.add_log_message(message)
+            self.main_interface.log_in_frame.add_log_message(message)
             return
 
         #the following two parametrs help us make the window next to the paramets button
@@ -240,12 +240,12 @@ class StrategyFrame(tk.Frame):
                 if len(temp_list) == 3:
                     message = f"Error: didn't pick in {x.capitalize()} {y.capitalize()}"
                     open_temp_frame(self.main_interface, message, bg_color="grey" )
-                    self.main_interface.log_frame.add_log_message(message)
+                    self.main_interface.log_in_frame.add_log_message(message)
 
                 else :
                     message = f"Error: didn't pick in {x.capitalize()}"
                     open_temp_frame(self.main_interface, message,  bg_color="grey")
-                    self.main_interface.log_frame.add_log_message(message)
+                    self.main_interface.log_in_frame.add_log_message(message)
 
                 return
 
@@ -254,13 +254,13 @@ class StrategyFrame(tk.Frame):
         #check if all peramerters are set , if not display an error message in log
         for i in ["Balance Percentage", "Take Profit", "Stop Loss"]:
             if self.widgets[i][index].get() == "":
-                self.main_interface.log_frame.add_log_message(f"Error: missing {i.lower()} parameter")
+                self.main_interface.log_in_frame.add_log_message(f"Error: missing {i.lower()} parameter")
                 return
 
             #loop throw extra parameters strategy to make sure the are all filed
             for i in self.extra_params_dict[strategy_selected]:
                 if self.additional_parameters[index][i['code_name']] is None:
-                    self.main_interface.log_frame.add_log_message(f"Error: missing {i['name']} parameter")
+                    self.main_interface.log_in_frame.add_log_message(f"Error: missing {i['name']} parameter")
                     return
 
         # get the information
@@ -291,13 +291,13 @@ class StrategyFrame(tk.Frame):
                                                 take_profit, stop_loss, self.additional_parameters[index])
 
             # Collects historical data. It is just one API call so that is ok, but be careful not to call methods
-            # that would lock the UI for too long.
+            # that would lock the interface for too long.
             # For example don't make a query to a database containing billions of rows, your interface_old would freeze.
 
             new_strategy.candles = self.exchanges[exchange].get_historical_candles(contract, timeframe)
 
             if len(new_strategy.candles) == 0:
-                self.main_interface.log_frame.add_log_message(f"There is no historical data retrieved for {contract.symbol}")
+                self.main_interface.log_in_frame.add_log_message(f"There is no historical data retrieved for {contract.symbol}")
                 return
 
             if exchange == "Binance":
@@ -314,7 +314,7 @@ class StrategyFrame(tk.Frame):
                 self.widgets["Activation"][index].config(bg="green", text="ON")
 
             self.widgets['Activation'][index].config(bg="darkgreen", text="ON")
-            self.main_interface.log_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - started")
+            self.main_interface.log_in_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - started")
 
 
         else:
@@ -328,7 +328,7 @@ class StrategyFrame(tk.Frame):
                     self.widgets[name][index].config(stat=tk.NORMAL)
 
                 self.widgets["Activation"][index].config(bg="darkred", text="OFF")
-            self.main_interface.log_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - stopped")
+            self.main_interface.log_in_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - stopped")
 
     def update_color(self, new_bg_color: str, new_fg_color: str):
         self.bg = new_bg_color
