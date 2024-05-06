@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from strategies import TechnicalStrategy, BreakoutStrategy
+from strategies import TechnicalStrategy, BreakoutStrategy, EngulfingStrategy
 from utils import *
 from database import WorkspaceData
 import json
@@ -46,6 +46,7 @@ class StrategyFrame(tk.Frame):
         self.exchanges = {"Binance": binance, "Bitmex": bitmex}
         self.all_contracts = []
         self.all_labels=[]
+        self.extra_parameters_entries=[]
 
         #put all contarct in the same list
         for exchange, client in self.exchanges.items():
@@ -73,9 +74,9 @@ class StrategyFrame(tk.Frame):
                         {"name": "Timeframe","width": 10},{"name": "Balance [%]", "width": 10},
                         {"name": "Profit [%]", "width": 10}, { "name": "stop loss [%]", "width":  10}]
 
-        self.strategies = ["Technical", "Breakout"]
+        self.strategies = ["Technical", "Breakout", "Engulfing"]
 
-        self.all_timeframes = ["1m", "5m", "15m", "30m", "1h", "2h"]
+        self.all_timeframes = ["1m","3m","5m", "15m", "30m", "1h", "2h", "4h"]
 
         self.params_dict = [
             {"name": "Contract", "widget": tk.OptionMenu, "data_type": str, "options": self.all_contracts,
@@ -104,7 +105,11 @@ class StrategyFrame(tk.Frame):
             ],
             "Breakout": [
                 {"code_name": "Minimum Volume", "name": "Minimum Volume", "widget": tk.Entry, "data_type": float},
+            ],
+            "Engulfing": [
+                {"code_name": "Minimum Volume", "name": "Minimum Volume", "widget": tk.Entry, "data_type": float},
             ]
+
         }
         self.additional_parameters = dict()
         self.extra_input = dict()
@@ -174,7 +179,7 @@ class StrategyFrame(tk.Frame):
         #the following two parametrs help us make the window next to the paramets button
         x, y = self.widgets["Parameters"][index].winfo_rootx(), self.widgets["Parameters"][index].winfo_rooty()
 
-        self.window = tk.Toplevel(self, bg= self.bg, bd=10)
+        self.window = tk.Toplevel(self, bg=self.bg, bd=10)
         self.window.title("Parameters")
 
         #window place
@@ -194,16 +199,15 @@ class StrategyFrame(tk.Frame):
             temp_label.grid(row=row, column=0)
 
             if param['widget'] == tk.Entry:
-                entry_widget = tk.Entry(self.window, bg="white", justify=tk.CENTER, fg=self.bg,
+                entry_widget = tk.Entry(self.window, bg="white", justify=tk.CENTER, fg="Black",
                                         insertbackground="Black")
-
-
 
                 default_value = self.additional_parameters[index].get(code_name)
                 if default_value is not None:
                     entry_widget.insert(tk.END, str(default_value))
 
                 self.extra_input[code_name] = entry_widget
+                self.extra_parameters_entries.append(entry_widget)
 
             else:
                 continue
@@ -223,15 +227,21 @@ class StrategyFrame(tk.Frame):
             code_name = param['code_name']
             input_value = self.extra_input[code_name].get()
 
-            if not input_value:
-                self.additional_parameters[index][code_name] = None
-            else:
-                self.additional_parameters[index][code_name] = param['data_type'](input_value)
+            # Check if input is a valid number between 0 and 100
+            try:
+                input_number = float(input_value)
+                if not (0 <= input_number <= 100):
+                    self.main_interface.log_in_frame.add_log_message("Input value must be between 0 and 100")
+            except ValueError:
+                # Handle invalid input
+                self.main_interface.log_in_frame.add_log_message("Invalid input in extra parameters")
+                return
+
+            # Update dictionary if input is valid
+            self.additional_parameters[index][code_name] = param['data_type'](input_value)
 
         # Close the window
         self.window.destroy()
-
-
     def switch_strategy(self, index: int):
 
         for i in ["var_Contract","var_strategy_type", "var_Timeframe"]:
@@ -278,9 +288,28 @@ class StrategyFrame(tk.Frame):
         print(exchange)
         timeframe = self.widgets['var_Timeframe'][index].get()
         contract = self.exchanges[exchange].contracts[symbol]
-        balance_pct = float(self.widgets['balance_pct'][index].get())
-        take_profit = float(self.widgets['take_profit'][index].get())
-        stop_loss = float(self.widgets['stop_loss'][index].get())
+        try:
+            balance_pct = float(self.widgets['balance_pct'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for balance")
+            return
+        try:
+            take_profit = float(self.widgets['take_profit'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for take profit")
+            return
+
+        try:
+            stop_loss = float(self.widgets['stop_loss'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for stop loss")
+            return
 
         # check if the button is off Or ON
         if self.widgets['Activation'][index].cget("text") == "OFF":
@@ -292,8 +321,12 @@ class StrategyFrame(tk.Frame):
                                                  take_profit, stop_loss, self.additional_parameters[index])
 
             # strategy_selected == "Breakout":
-            else:
+            elif strategy_selected == "Breakout":
                 new_strategy = BreakoutStrategy(self.exchanges[exchange], contract, exchange, timeframe, balance_pct,
+                                                take_profit, stop_loss, self.additional_parameters[index])
+
+            else:
+                new_strategy = EngulfingStrategy(self.exchanges[exchange], contract, exchange, timeframe, balance_pct,
                                                 take_profit, stop_loss, self.additional_parameters[index])
 
             # Collects historical data. It is just one API call so that is ok, but be careful not to call methods

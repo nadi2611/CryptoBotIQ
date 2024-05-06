@@ -19,7 +19,7 @@ class interface(tk.Tk):
         self.fg_color = "White"
         self.color_button_text = "Light Mode"
 
-        self.title("Trading Bot")
+        self.title("CryptoBotIQ")
         self.protocol("WM_DELETE_WINDOW", self._proper_close)
 
         self.config(bg=self.bg_color)
@@ -67,20 +67,24 @@ class interface(tk.Tk):
             self.binance.ws.close()
             self.bitmex.ws.close()
 
+            print("in proper close")
             self.stop_timer()
 
             self.destroy()  # Destroys the UI and terminates the program as no other thread is running
     def run_timer(self):
 
-        self.timer = threading.Timer(10, self.run_timer).start()
+        self.timer = (threading.Timer(10, self.run_timer))
+        self.timer.start()
+        self.timer_is_alive = True
         # Call your function
         self.save_workspace()
 
     def stop_timer(self):
-        # Check if the timer is running
-        if self.timer and self.timer.is_alive():
-            self.timer.cancel()  # Stop the timer
-
+        print("Attempting to stop the timer")
+        if self.timer_is_alive:
+            print("Cancelling the timer")
+            self.timer.cancel()# Wait for the timer thread to complete
+            self.log_in_frame.timer.cancel()
     def  update_color(self):
         if self.bg_color == "Black":
             self.bg_color = "White"
@@ -132,7 +136,7 @@ class interface(tk.Tk):
                                json.dumps(extra_params),))
 
             self.Strategy_frame.db.save("strategies", strategies)
-            self.log_in_frame.add_log_message("Workspace saved")
+            #self.log_in_frame.add_log_message("Workspace saved")
 
     def update_ui(self):
         # Trades and Logs

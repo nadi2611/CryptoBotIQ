@@ -40,6 +40,7 @@ class Login(tk.Frame):
 
         self.run_timer()
 
+
     def change_color_button(self, main_interface):
         main_interface.update_color()
 
@@ -210,8 +211,6 @@ class Login(tk.Frame):
                 on_close()
             window.destroy()
 
-
-
         window = tk.Toplevel(main_interface)
         window.config(bg=self.bg)
         window.protocol("WM_DELETE_WINDOW", on_window_close)
@@ -228,7 +227,8 @@ class Login(tk.Frame):
 
     def run_timer(self):
 
-        self.timer = threading.Timer(10, self.run_timer).start()
+        self.timer = threading.Timer(10, self.run_timer)
+        self.timer.start()
         if self.watch_list_opend:
             # Call your function
             self.save_workspace()
