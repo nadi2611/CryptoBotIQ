@@ -2,7 +2,6 @@ import tkinter as tk
 from models import Trade
 from UI.ui_scroll_frame import ScrollFrame
 import datetime
-import threading
 
 BOLD_FONT = ("Calibri", 16, "bold")
 FONT = ("corbel", 12, "normal")
@@ -15,7 +14,7 @@ class TradingFrame(tk.Frame):
         super().__init__(*args, **kwargs)
 
         self.body_widgets = dict()
-        self.headers = ["time", "symbol", "exchange", "strategy", "side", "quantity", "status", "pnl"]
+        self.headers = ["time", "symbol", "exchange", "strategy", "side", "size", "status", "pnl"]
 
         self.table_frame = tk.Frame(self, bg=self.bg)
         self.table_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
@@ -40,7 +39,7 @@ class TradingFrame(tk.Frame):
 
         for h in self.headers:
             self.body_widgets[h] = dict()
-            if h in ["status", "pnl", "quantity"]:
+            if h in ["status", "pnl", "size"]:
                 self.body_widgets[h + "_var"] = dict()
 
         self.body_index = 0
@@ -65,13 +64,14 @@ class TradingFrame(tk.Frame):
             self.body_widgets[key][t_index] = label
             self.all_labels.append(label)
 
-        self.body_widgets['quantity_var'][
+        self.body_widgets['size_var'][
             t_index] = tk.StringVar()  # Variable because the order is not always filled immediately
-        self.body_widgets['quantity'][t_index] = tk.Label(self.body_frame.frame,
-                                                          textvariable=self.body_widgets['quantity_var'][t_index],
+        self.body_widgets['size'][t_index] = tk.Label(self.body_frame.frame,
+                                                          textvariable=self.body_widgets['size_var'][t_index],
                                                           bg=self.bg, fg=self.fg, font=FONT, width=WIDTH, anchor="w")
-        self.body_widgets['quantity'][t_index].grid(row=index, column=6, sticky="nsew")
-        self.all_labels.append(self.body_widgets['quantity'][t_index])
+
+        self.body_widgets['size'][t_index].grid(row=index, column=6, sticky="nsew")
+        self.all_labels.append(self.body_widgets['size'][t_index])
 
         # Status
 

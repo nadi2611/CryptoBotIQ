@@ -159,10 +159,14 @@ class interface(tk.Tk):
                         else:
                             precision = 8  # The Bitmex PNL is always is BTC, thus 8 decimals
 
-                        pnl_str = "{0:.{prec}f}".format(trade.pnl, prec=precision)
+                        pnl_str = "{0:.{prec}f}".format(trade.pnl, prec=precision)+"$"
+                        size_str = ""
+                        if trade.quantity is not None and trade.entry_price is not None:
+                            size_str = "{0:.{prec}f}".format(trade.quantity * trade.entry_price, prec=precision) + "$"
+                            # Rest of your code for updating the UI
                         self.trade_frame.body_widgets['pnl_var'][trade.time].set(pnl_str)
                         self.trade_frame.body_widgets['status_var'][trade.time].set(trade.status.capitalize())
-                        self.trade_frame.body_widgets['quantity_var'][trade.time].set(trade.quantity)
+                        self.trade_frame.body_widgets['size_var'][trade.time].set(size_str)
 
             except RuntimeError as e:
                 self.log_in_frame.add_log_message("Error while looping through strategies dictionary: %s", e)

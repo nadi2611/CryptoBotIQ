@@ -196,6 +196,7 @@ class Strategy:
         price = self.candles[-1].close
 
         if trade.side == "long":
+            price = self.client.prices[self.contract.symbol]['bid']
             if self.stop_loss is not None:
                 if price <= trade.entry_price * (1 - self.stop_loss / 100):
                     sl_triggered = True
@@ -204,6 +205,7 @@ class Strategy:
                     tp_triggered = True
 
         elif trade.side == "short":
+            price = self.client.prices[self.contract.symbol]['ask']
             if self.stop_loss is not None:
                 if price >= trade.entry_price * (1 + self.stop_loss / 100):
                     sl_triggered = True
@@ -228,8 +230,11 @@ class Strategy:
             order_status = self.client.place_order(self.contract, "MARKET", trade.quantity, order_side)
 
             if order_status is not None:
+                #self.update_pnl(trade, price)
                 self._add_log(f"Exit order on {self.contract.symbol} {self.tf} placed successfully")
                 trade.status = "closed"
+                print(f"hi , trade.pnl={trade.pnl}, trade.entry_price = {trade.entry_price},\
+                     Current Price = {price} ,  trade.quantity = {trade.quantity},quantity_decimals= {trade.contract.quantity_decimals}")
                 self.ongoing_position = False
 
 
@@ -391,3 +396,15 @@ class EngulfingStrategy(Strategy):
 
             if signal_result in [1, -1]:
                 self._open_position(signal_result)
+
+    def update_pnl(self, trade , current_price ):
+        if trade.side == "long":
+            print("in long")
+            trade.pnl = (current_price- trade.entry_price) * trade.quantity
+            print(f"in update_pnl , trade.pnl={trade.pnl} ->  trade.entry_price = {trade.entry_price} \
+                current_price= {current_price},trade.quantity = {trade.quantity}")
+        elif trade.side == "short":
+            print("in short")
+            trade.pnl = (trade.entry_price - current_price) * trade.quantity
+            print(f"in update_pnl , trade.pnl={trade.pnl} ->  trade.entry_price = {trade.entry_price} \
+                current_price= {current_price},trade.quantity = {trade.quantity}")
