@@ -6,8 +6,6 @@ from database import WorkspaceData
 import json
 
 from UI.ui_scroll_frame import ScrollFrame
-from connectors.bitmex import BitmexClient
-from connectors.binance import BinanceClient
 
 BOLD_FONT = ("Calibri", 11, "bold")
 SMALL_FONT = ("corbel", 10, "bold")
@@ -35,7 +33,6 @@ class StrategyFrame(tk.Frame):
 
         self.db = WorkspaceData()
 
-        bitmex = kwargs.pop('bitmex')
         binance = kwargs.pop('binance')
         self.bg: str = kwargs.pop('bg_color')
         self.fg: str = kwargs.pop('fg_color')
@@ -43,7 +40,7 @@ class StrategyFrame(tk.Frame):
 
         self.config(bg=self.bg)
         self.main_interface = main_interface
-        self.exchanges = {"Binance": binance, "Bitmex": bitmex}
+        self.exchanges = {"Binance": binance}
         self.all_contracts = []
         self.all_labels=[]
         self.extra_parameters_entries=[]

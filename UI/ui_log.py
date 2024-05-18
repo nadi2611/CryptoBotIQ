@@ -35,7 +35,6 @@ class Login(tk.Frame):
         self.watch_list_button.place(relx=1.0, rely=0.0, anchor=tk.NE, x=-85)
 
         self.binance = main_interface.binance
-        self.bitmex = main_interface.bitmex
         self.watch_list_opend = False
 
         self.run_timer()
@@ -77,7 +76,6 @@ class Login(tk.Frame):
     def update_logs(self):
         if (self.watch_list_opend):
             self.update_exchange_logs(self.binance)
-            self.update_exchange_logs(self.bitmex)
 
             for key, value in self.watch_list.widgets['symbol'].items():
                 symbol = self.watch_list.widgets['symbol'][key].cget("text")
@@ -85,8 +83,6 @@ class Login(tk.Frame):
 
                 if exchange == "Binance" and symbol in self.binance.contracts:
                     self.update_watch_list_prices(symbol, self.binance, key)
-                elif exchange == "Bitmex" and symbol in self.bitmex.contracts:
-                    self.update_watch_list_prices(symbol, self.bitmex, key)
 
             self.after(2000, self.update_logs)
 
@@ -115,18 +111,13 @@ class Login(tk.Frame):
     def _update_ui(self):
 
         # Logs
-        for log in self.bitmex.logs:
-            if not log['displayed']:
-                self.log_in_frame.add_log_message(log['log'])
-                log['displayed'] = True
-
         for log in self.binance.logs:
             if not log['displayed']:
                 self.log_in_frame.add_log_message(log['log'])
                 log['displayed'] = True
 
         # Trades and Logs
-        for client in [self.binance, self.bitmex]:
+        for client in [self.binance]:
 
             try:  # try...except statement to handle the case when a dictionary is updated during the following loops
 
@@ -145,7 +136,7 @@ class Login(tk.Frame):
                         if "binance" in trade.contract.exchange:
                             precision = trade.contract.price_decimals
                         else:
-                            precision = 8  # The Bitmex PNL is always is BTC, thus 8 decimals
+                            precision = 8
 
                         pnl_str = "{0:.{prec}f}".format(trade.pnl, prec=precision)
                         self.trade_frame.body_widgets['pnl_var'][trade.time].set(pnl_str)
@@ -177,17 +168,6 @@ class Login(tk.Frame):
 
                     prices = self.binance.prices[symbol]
 
-                elif exchange == "Bitmex":
-                    if symbol not in self.bitmex.contracts:
-                        continue
-
-                    if symbol not in self.bitmex.prices:
-                        continue
-
-                    precision = self.bitmex.contracts[symbol].price_decimals
-
-                    prices = self.bitmex.prices[symbol]
-
                 else:
                     continue
 
@@ -218,7 +198,7 @@ class Login(tk.Frame):
         window.resizable(width=False, height=False)
 
         self.watch_list = WatchList(window, binance_contracts=self.binance.contracts,
-                                    bitmex_contracts=self.bitmex.contracts, bg_color=self.bg,
+                                   bg_color=self.bg,
                                     fg_color=self.fg)
         self.watch_list.grid(row=0, column=0, sticky="nsew")
         self.watch_list.lift()  # Raise the WatchList widget to the top

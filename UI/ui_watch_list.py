@@ -8,7 +8,7 @@ BOLD_FONT = ("corbel", 10, "bold")
 FONT = ("corbel", 10, "normal")
 
 class WatchList(tk.Frame):
-    def __init__(self,parent, binance_contracts: Dict[str, Contract], bitmex_contracts: Dict[str, Contract],
+    def __init__(self,parent, binance_contracts: Dict[str, Contract],
                  *args, **kwargs):
         self.bg = kwargs.pop('bg_color')
         self.fg = kwargs.pop('fg_color')
@@ -16,7 +16,6 @@ class WatchList(tk.Frame):
         self.config(bg=self.bg)
 
         self.binance_keys = list(binance_contracts.keys())
-        self.bitmex_keys = list(bitmex_contracts.keys())
         self.parent = parent
 
         self.db = WorkspaceData()
@@ -30,14 +29,9 @@ class WatchList(tk.Frame):
         self.scroll_frame.grid(row=1, column=0, sticky="nsew")  # Place the scroll frame in the grid
 
         self.label_binance = tk.Label(self.frame, text="Binance", fg=self.fg, bg=self.bg, font=BOLD_FONT)
-        #self.label_bitmex = tk.Label(self.frame, text="Bitmex", fg=self.fg, bg=self.bg, font=BOLD_FONT)
-
         self.label_binance.grid(row=0, column=2,sticky="nsew")  # Center label horizontally
-        #self.label_bitmex.grid(row=0, column=3, sticky="nsew")  # Center label horizontally
         self.binance_entry = self.create_entry(self, parent=self.frame, column=2 )
-        #self.bitmex_entry = self.create_entry(self, parent=self.frame, column=3)
         self.binance_entry.config(bg="white", fg="black")
-        #self.bitmex_entry.config(bg="white", fg="black")
 
         # Center the frame within its parent using the pack manager
         self.pack(expand=True, fill=tk.BOTH)
@@ -45,8 +39,6 @@ class WatchList(tk.Frame):
         self.headers = ["symbol", "exchange", "ask", "bid", "Delete"]
 
         self.body_index = 3
-
-        #self.bitmex_entry.bind("<Return>",  self.add_bitmex_symbol)
         self.binance_entry.bind("<Return>", self.add_binance_symbol)
         self.all_labels = []
         for index, i in enumerate(self.headers):
@@ -124,12 +116,6 @@ class WatchList(tk.Frame):
             self.add_symbol(symbol, "Binance")
             self.binance_entry.delete(0, tk.END)
 
-    #def add_bitmex_symbol(self, event):
-    #    symbol = self.bitmex_entry.get()
-    #    if symbol in self.bitmex_keys:
-    #        self.add_symbol(symbol, "Bitmex")
-    #        self.bitmex_entry.delete(0, tk.END)
-
     def delete_symbol(self, index :int):
         for i in self.headers:
             self.widgets[i][index].grid_forget()
@@ -143,7 +129,6 @@ class WatchList(tk.Frame):
         self.frame.config(bg=self.bg)
         self.scroll_frame.change_background_color(color=self.bg)
         self.label_binance.config(bg=self.bg, fg=self.fg)
-        self.label_bitmex.config(bg=self.bg, fg=self.fg)
 
         for i in range(len(self.all_labels)):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)

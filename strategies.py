@@ -6,8 +6,7 @@ import pandas as pd
 from models import *
 
 if TYPE_CHECKING:  # Import the connector class names only for typing purpose (the classes aren't actually imported)
-    from connectors.bitmex import BitmexClient
-    from connectors.binance import BinanceClient
+    from binance import BinanceClient
 
 logger = logging.getLogger()
 
@@ -15,7 +14,7 @@ logger = logging.getLogger()
 TF_EQUIV = {"1m": 60, "3m": 180, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600,"2h": 7200 ,"4h": 14400}
 
 class Strategy:
-    def __init__(self, client: Union["BitmexClient", "BinanceClient"], contract: Contract, exchange: str,
+    def __init__(self, client: Union["BinanceClient"], contract: Contract, exchange: str,
                  timeframe: str, balance_pct: float, take_profit: float, stop_loss: float, strat_name):
 
         self.client = client

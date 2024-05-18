@@ -1,18 +1,16 @@
 import tkinter as tk
 import threading
 from tkinter.messagebox import askquestion
-from connectors.bitmex import BitmexClient
-from connectors.binance import BinanceClient
+from binance import BinanceClient
 from UI.ui_trade import TradingFrame
 from UI.ui_log import Login
 from UI.ui_strategy import StrategyFrame
 import json
 
 class interface(tk.Tk):
-    def __init__(self, bitmex: BitmexClient, binance: BinanceClient):
+    def __init__(self, binance: BinanceClient):
         super().__init__()
 
-        self.bitmex = bitmex
         self.binance = binance
 
         self.bg_color = "Black"
@@ -20,7 +18,7 @@ class interface(tk.Tk):
         self.color_button_text = "Light Mode"
 
         self.title("CryptoBotIQ")
-        self.protocol("WM_DELETE_WINDOW", self._proper_close)
+        self.protocol("WM_DELETE_WINDOW", self.proper_close)
 
         self.config(bg=self.bg_color)
 
@@ -35,7 +33,7 @@ class interface(tk.Tk):
         self.right_frame = tk.Frame(self, bg=self.bg_color)
         self.right_frame.grid(row=0, column=1, sticky="nsew")
 
-        self.Strategy_frame = StrategyFrame(self, self.right_frame, bitmex=self.bitmex, binance=self.binance,
+        self.Strategy_frame = StrategyFrame(self, self.right_frame, binance=self.binance,
                                             bg_color=self.bg_color, fg_color=self.fg_color)
         self.Strategy_frame.grid(row=0, column=0, sticky="nsew")  # Updated row index to 0
 
@@ -59,17 +57,13 @@ class interface(tk.Tk):
         self.run_timer()
         self.update_ui()
 
-    def _proper_close(self):
+    def proper_close(self):
         result = askquestion("Confirmation", "Do you really want to exit the application?")
         if result == "yes":
             self.binance.reconnect = False  # Avoids the infinite reconnect loop in _start_ws()
-            self.bitmex.reconnect = False
             self.binance.ws.close()
-            self.bitmex.ws.close()
-
             print("in proper close")
             self.stop_timer()
-
             self.destroy()  # Destroys the UI and terminates the program as no other thread is running
     def run_timer(self):
 
@@ -140,7 +134,7 @@ class interface(tk.Tk):
 
     def update_ui(self):
         # Trades and Logs
-        for client in [self.binance, self.bitmex]:
+        for client in [self.binance]:
             try:  # try...except statement to handle the case when a dictionary is updated during the following loops
                 for b_index, strat in client.strategies.items():
                     for log in strat.logs:
@@ -157,7 +151,7 @@ class interface(tk.Tk):
                         if "binance" in trade.contract.exchange:
                             precision = trade.contract.price_decimals
                         else:
-                            precision = 8  # The Bitmex PNL is always is BTC, thus 8 decimals
+                            precision = 8
 
                         pnl_str = "{0:.{prec}f}".format(trade.pnl, prec=precision)+"$"
                         size_str = ""

@@ -1,7 +1,5 @@
 import logging
-
-from connectors.binance import BinanceClient
-from connectors.bitmex import BitmexClient
+from binance import BinanceClient
 
 from UI.ui_main import interface
 import configparser
@@ -33,14 +31,10 @@ if __name__ == '__main__':
     binance_secret_key = config.get('Credentials', 'BINANCE_SECRET_KEY')
     binance_public_key = config.get('Credentials', 'BINANCE_PUBLIC_KEY')
 
-    bitmax_secret_key = config.get('Credentials', 'BITMAX_SECRET_KEY')
-    bitmax_public_key = config.get('Credentials', 'BITMAX_PUBLIC_KEY')
-
     binance = BinanceClient(binance_public_key,
                             binance_secret_key,
                             testnet=True, futures=True)
-    bitmex = BitmexClient(bitmax_public_key, bitmax_secret_key, testnet=True)
 
-    root = interface(bitmex, binance)
+    root = interface(binance)
     root.mainloop()
 

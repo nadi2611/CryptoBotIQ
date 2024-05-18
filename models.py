@@ -1,10 +1,3 @@
-import dateutil.parser
-import datetime
-
-
-BITMEX_MULTIPLIER = 0.00000001  # Converts satoshi numbers to Bitcoin on Bitmex
-BITMEX_TF_MINUTES = {"1m": 1, "5m": 5, "1h": 60, "1d": 1440}
-
 
 class Balance:
     def __init__(self, info, exchange):
@@ -19,14 +12,6 @@ class Balance:
             self.free = float(info['free'])
             self.locked = float(info['locked'])
 
-        elif exchange == "bitmex":
-            self.initial_margin = info['initMargin'] * BITMEX_MULTIPLIER
-            self.maintenance_margin = info['maintMargin'] * BITMEX_MULTIPLIER
-            self.margin_balance = info['marginBalance'] * BITMEX_MULTIPLIER
-            self.wallet_balance = info['walletBalance'] * BITMEX_MULTIPLIER
-            self.unrealized_pnl = info['unrealisedPnl'] * BITMEX_MULTIPLIER
-
-
 class Candle:
     def __init__(self, candle_info, timeframe, exchange):
         if exchange in ["binance_futures", "binance_spot"]:
@@ -36,16 +21,6 @@ class Candle:
             self.low = float(candle_info[3])
             self.close = float(candle_info[4])
             self.volume = float(candle_info[5])
-
-        elif exchange == "bitmex":
-            self.timestamp = dateutil.parser.isoparse(candle_info['timestamp'])
-            self.timestamp = self.timestamp - datetime.timedelta(minutes=BITMEX_TF_MINUTES[timeframe])
-            self.timestamp = int(self.timestamp.timestamp() * 1000)
-            self.open = candle_info['open']
-            self.high = candle_info['high']
-            self.low = candle_info['low']
-            self.close = candle_info['close']
-            self.volume = candle_info['volume']
 
         elif exchange == "parse_trade":
             self.timestamp = candle_info['ts']
@@ -95,23 +70,6 @@ class Contract:
                     self.lot_size = float(b_filter['stepSize'])
                     self.quantity_decimals = tick_to_decimals(float(b_filter['stepSize']))
 
-        elif exchange == "bitmex":
-            self.symbol = contract_info['symbol']
-            self.base_asset = contract_info['rootSymbol']
-            self.quote_asset = contract_info['quoteCurrency']
-            self.price_decimals = tick_to_decimals(contract_info['tickSize'])
-            self.quantity_decimals = tick_to_decimals(contract_info['lotSize'])
-            self.tick_size = contract_info['tickSize']
-            self.lot_size = contract_info['lotSize']
-
-            self.quanto = contract_info['isQuanto']
-            self.inverse = contract_info['isInverse']
-
-            self.multiplier = contract_info['multiplier'] * BITMEX_MULTIPLIER
-
-            if self.inverse:
-                self.multiplier *= -1
-
         self.exchange = exchange
 
 
@@ -127,11 +85,6 @@ class OrderStatus:
             self.status = order_info['status'].lower()
             self.avg_price = float(order_info['avgPrice'])
             self.executed_qty = float(order_info['executedQty'])
-        elif exchange == "bitmex":
-            self.order_id = order_info['orderID']
-            self.status = order_info['ordStatus'].lower()
-            self.avg_price = order_info['avgPx']
-            self.executed_qty = order_info['cumQty']
 
 
 class Trade:
