@@ -30,14 +30,14 @@ class WatchList(tk.Frame):
         self.scroll_frame.grid(row=1, column=0, sticky="nsew")  # Place the scroll frame in the grid
 
         self.label_binance = tk.Label(self.frame, text="Binance", fg=self.fg, bg=self.bg, font=BOLD_FONT)
-        self.label_bitmex = tk.Label(self.frame, text="Bitmex", fg=self.fg, bg=self.bg, font=BOLD_FONT)
+        #self.label_bitmex = tk.Label(self.frame, text="Bitmex", fg=self.fg, bg=self.bg, font=BOLD_FONT)
 
-        self.label_binance.grid(row=0, column=2, sticky="nsew")  # Center label horizontally
-        self.label_bitmex.grid(row=0, column=3, sticky="nsew")  # Center label horizontally
-        self.binance_entry = self.create_entry(self, parent=self.frame, column=2)
-        self.bitmex_entry = self.create_entry(self, parent=self.frame, column=3)
+        self.label_binance.grid(row=0, column=2,sticky="nsew")  # Center label horizontally
+        #self.label_bitmex.grid(row=0, column=3, sticky="nsew")  # Center label horizontally
+        self.binance_entry = self.create_entry(self, parent=self.frame, column=2 )
+        #self.bitmex_entry = self.create_entry(self, parent=self.frame, column=3)
         self.binance_entry.config(bg="white", fg="black")
-        self.bitmex_entry.config(bg="white", fg="black")
+        #self.bitmex_entry.config(bg="white", fg="black")
 
         # Center the frame within its parent using the pack manager
         self.pack(expand=True, fill=tk.BOTH)
@@ -46,18 +46,19 @@ class WatchList(tk.Frame):
 
         self.body_index = 3
 
-        self.bitmex_entry.bind("<Return>",  self.add_bitmex_symbol)
+        #self.bitmex_entry.bind("<Return>",  self.add_bitmex_symbol)
         self.binance_entry.bind("<Return>", self.add_binance_symbol)
         self.all_labels = []
         for index, i in enumerate(self.headers):
             if i != "Delete":
                 tmp = tk.Label(self.frame, text=i, fg=self.fg, bg= self.bg, font=BOLD_FONT, width=10)
-                tmp.grid(row=2, column=1+index, sticky="nsew")
+                tmp.grid(row=2, column=index, sticky="nsew")
                 self.all_labels.append(tmp)
             else:
                 tmp = tk.Label(self.frame, text=i, fg="white", bg="red4", font=BOLD_FONT)
-                tmp.grid(row=2, column=index+1, sticky="nsew")
+                tmp.grid(row=2, column=index, sticky="nsew")
 
+        tmp.grid(row=2, column=5, sticky="nsew")
         #add empty column for the scroll
         tmp = tk.Label(self.frame, text="", fg=self.fg, bg=self.bg, font=BOLD_FONT, width=3)
         tmp.grid(row=2, column=6, sticky="nsew")
@@ -67,13 +68,6 @@ class WatchList(tk.Frame):
             self.widgets[i] = dict()
             if i in ["bid", "ask"]:
                 self.widgets[f"var_{i}"] = dict()
-
-        self.labels_info = [
-            ('symbol',  str, 1),
-            ('exchange', str, 2),
-            ('bid', str, 3),
-            ('ask', str, 4),
-        ]
 
         saved_symbols = self.db.get("watchlist")
 
@@ -103,23 +97,23 @@ class WatchList(tk.Frame):
         self.widgets['var_ask'][index] = tk.StringVar()
 
         labels_info = [
-            ('symbol', symbol, 1, 10),
-            ('exchange', exchange, 2, 15),
-            ('bid', self.widgets['var_bid'][index], 3, 15),
-            ('ask', self.widgets['var_ask'][index], 4, 15),
+            ('symbol', symbol, 0, 10),
+            ('exchange', exchange, 1, 11),
+            ('bid', self.widgets['var_bid'][index], 2, 14),
+            ('ask', self.widgets['var_ask'][index], 3, 14),
         ]
 
         for name, value, col, width in labels_info:
             label = tk.Label(self.scroll_frame.frame, text=value if isinstance(value, str) else "",
                              textvariable=self.widgets['var_bid'][index] if not isinstance(value, str) else ""
                              ,font=FONT, fg=self.fg, bg=self.bg, width=width)
-            label.grid(row=index, column=col)
+            label.grid(row=index, column=col,sticky="nsew" )
             self.widgets[name][index] = label
             self.all_labels.append(label)
 
         delete_button = tk.Button(self.scroll_frame.frame, command=lambda: self.delete_symbol(index),
                                   font=BOLD_FONT, fg="white", bg="red4", text="X")
-        delete_button.grid(row=index, column=5)
+        delete_button.grid(row=index, column=4, sticky="nsew" )
         self.widgets['Delete'][index] = delete_button
 
         self.body_index += 1
@@ -130,11 +124,11 @@ class WatchList(tk.Frame):
             self.add_symbol(symbol, "Binance")
             self.binance_entry.delete(0, tk.END)
 
-    def add_bitmex_symbol(self, event):
-        symbol = self.bitmex_entry.get()
-        if symbol in self.bitmex_keys:
-            self.add_symbol(symbol, "Bitmex")
-            self.bitmex_entry.delete(0, tk.END)
+    #def add_bitmex_symbol(self, event):
+    #    symbol = self.bitmex_entry.get()
+    #    if symbol in self.bitmex_keys:
+    #        self.add_symbol(symbol, "Bitmex")
+    #        self.bitmex_entry.delete(0, tk.END)
 
     def delete_symbol(self, index :int):
         for i in self.headers:

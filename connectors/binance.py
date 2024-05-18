@@ -234,7 +234,7 @@ class BinanceClient:
             else:
                 for a in account_data['balances']:
                     balances[a['asset']] = Balance(a, self.platform)
-
+        print(f"balance is {balances}")
         return balances
 
     def place_order(self, contract: Contract, order_type: str, quantity: float, side: str, price=None, tif=None) -> OrderStatus:
