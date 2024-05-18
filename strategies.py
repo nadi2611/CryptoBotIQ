@@ -314,9 +314,9 @@ class TechnicalStrategy(Strategy):
         macd_line, macd_signal = self._macd()
         rsi = self._rsi()
 
-        if rsi < 45 and macd_line > macd_signal: # 30
+        if rsi < 30 and macd_line > macd_signal:
             return 1
-        elif rsi > 50 and macd_line < macd_signal:#70
+        elif rsi > 70 and macd_line < macd_signal:
             return -1
         else:
             return 0
@@ -380,11 +380,17 @@ class EngulfingStrategy(Strategy):
         self._min_volume = other_params['Minimum Volume']
 
     def _check_signal(self) -> int:
-        if self.candles[-1].close > self.candles[-2].high and self.candles[-1].open < self.candles[-2].close \
-                and self.candles[-1].close > self.candles[-2].open and self.candles[-1].volume > self._min_volume:
+        if self.candles[-1].high > self.candles[-2].high and self.candles[-1].low < self.candles[-2].low\
+            and self.candles[-2].open > self.candles[-2].close and self.candles[-1].close > self.candles[-1].open\
+            and self.candles[-1].open < self.candles[-2].close and self.candles[-1].close > self.candles[-2].open\
+            and self.candles[-1].volume > self._min_volume:
             return 1
-        elif self.candles[-1].close < self.candles[-2].low and self.candles[-1].open > self.candles[-2].close \
-                and self.candles[-1].close < self.candles[-2].open and self.candles[-1].volume > self._min_volume:
+
+
+        elif (self.candles[-1].high > self.candles[-2].high and self.candles[-1].low < self.candles[-2].low\
+                and self.candles[-2].open < self.candles[-2].close and self.candles[-1].close < self.candles[-1].open \
+                and self.candles[-1].close < self.candles[-2].open and self.candles[-1].open > self.candles[-2].close \
+                and self.candles[-1].volume > self._min_volume):
             return -1
         else:
             return 0
