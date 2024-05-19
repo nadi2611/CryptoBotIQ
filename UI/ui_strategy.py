@@ -138,7 +138,9 @@ class StrategyFrame(tk.Frame):
                 self.widgets[name][index] = tk.OptionMenu(self.scroll_frame.frame,
                         self.widgets["var_" + name][index], *i['options'])
                 self.widgets[name][index].config(width=i['width'], bg="white", fg="black")
-                self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
+                #self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
+                self.widgets[name][index]["menu"].config(bg="white", fg="Black")
+
 
             elif i['widget'] == tk.Entry:
                 self.widgets[name][index] = tk.Entry(self.scroll_frame.frame, justify=tk.CENTER, bg="white", fg="black")
