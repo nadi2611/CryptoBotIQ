@@ -9,15 +9,14 @@ class ScrollFrame(tk.Frame):
         self.frame = tk.Frame(self.canvas, **kwargs)
 
         self.frame.bind("<Configure>", lambda event: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
-        self.frame.bind("<Enter>", lambda event: self.canvas.bind_all("<MouseWheel>", self._on_mousewheel))
+        self.frame.bind("<Enter>", lambda event: self.canvas.bind_all("<MouseWheel>", self.on_mousewheel))
         self.frame.bind("<Leave>", lambda event: self.canvas.unbind_all("<MouseWheel>"))
-
         self.canvas.create_window((0, 0), window=self.frame, anchor="nw")
         self.canvas.configure(yscrollcommand=self.vsb.set)
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.vsb.pack(side=tk.RIGHT, fill=tk.Y)
 
-    def _on_mousewheel(self, event):
+    def on_mousewheel(self, event):
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     def change_background_color(self, color):

@@ -1,10 +1,11 @@
 import tkinter as tk
 
-from strategies import TechnicalStrategy, BreakoutStrategy
+from strategies import TechnicalStrategy, BreakoutStrategy, EngulfingStrategy
 from utils import *
+from database import WorkspaceData
+import json
+
 from UI.ui_scroll_frame import ScrollFrame
-from connectors.bitmex import BitmexClient
-from connectors.binance import BinanceClient
 
 BOLD_FONT = ("Calibri", 11, "bold")
 SMALL_FONT = ("corbel", 10, "bold")
@@ -30,7 +31,8 @@ def open_temp_frame(main_interface: tk.Frame, message: str, bg_color: str):
 class StrategyFrame(tk.Frame):
     def __init__(self, main_interface, *args, **kwargs):
 
-        bitmex = kwargs.pop('bitmex')
+        self.db = WorkspaceData()
+
         binance = kwargs.pop('binance')
         self.bg: str = kwargs.pop('bg_color')
         self.fg: str = kwargs.pop('fg_color')
@@ -38,9 +40,10 @@ class StrategyFrame(tk.Frame):
 
         self.config(bg=self.bg)
         self.main_interface = main_interface
-        self.exchanges = {"Binance": binance, "Bitmex": bitmex}
+        self.exchanges = {"Binance": binance}
         self.all_contracts = []
         self.all_labels=[]
+        self.extra_parameters_entries=[]
 
         #put all contarct in the same list
         for exchange, client in self.exchanges.items():
@@ -66,11 +69,11 @@ class StrategyFrame(tk.Frame):
 
         self.headers = [{"name": "Contract", "width": 12}, {"name": "Strategy","width": 12},
                         {"name": "Timeframe","width": 10},{"name": "Balance [%]", "width": 10},
-                        {"name": "Profit [%]", "width": 10}, { "name": "Stop Loss [%]", "width":  10}]
+                        {"name": "Profit [%]", "width": 10}, { "name": "stop loss [%]", "width":  10}]
 
-        self.strategies = ["Technical", "Breakout"]
+        self.strategies = ["Technical", "Breakout", "Engulfing"]
 
-        self.all_timeframes = ["1m", "5m", "15m", "30m", "1h", "2h"]
+        self.all_timeframes = ["1m","3m","5m", "15m", "30m", "1h", "2h", "4h"]
 
         self.params_dict = [
             {"name": "Contract", "widget": tk.OptionMenu, "data_type": str, "options": self.all_contracts,
@@ -79,9 +82,9 @@ class StrategyFrame(tk.Frame):
              "options": self.strategies, "width": 15},
             {"name": "Timeframe", "widget": tk.OptionMenu, "data_type": "String", "options": self.all_timeframes,
                 "width": 8},
-            {"name": "Balance Percentage", "widget": tk.Entry, "data_type": float,  "width": 5},
-            {"name": "Take Profit", "widget": tk.Entry, "data_type": float,  "width": 5},
-            {"name": "Stop Loss", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "balance_pct", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "take_profit", "widget": tk.Entry, "data_type": float,  "width": 5},
+            {"name": "stop_loss", "widget": tk.Entry, "data_type": float,  "width": 5},
             {"name": "Parameters", "widget": tk.Button,  "bg":  self.bg,"text": "parameters",
              "action": self.popup, "color": "darkred"},
             {"name": "Activation", "widget": tk.Button,  "data_type": float, "action": self.switch_strategy,
@@ -99,7 +102,11 @@ class StrategyFrame(tk.Frame):
             ],
             "Breakout": [
                 {"code_name": "Minimum Volume", "name": "Minimum Volume", "widget": tk.Entry, "data_type": float},
+            ],
+            "Engulfing": [
+                {"code_name": "Minimum Volume", "name": "Minimum Volume", "widget": tk.Entry, "data_type": float},
             ]
+
         }
         self.additional_parameters = dict()
         self.extra_input = dict()
@@ -114,10 +121,12 @@ class StrategyFrame(tk.Frame):
             if i['name'] in ["strategy_type", "Contract", "Timeframe"]:
                     self.widgets['var_' + i['name']] = dict()
 
+        self._load_workspace()
+
+
     def add_strategy(self):
 
         index = self.body_index
-
         for col, i in enumerate(self.params_dict):
             name = i['name']
             if i['widget'] == tk.OptionMenu:
@@ -126,11 +135,12 @@ class StrategyFrame(tk.Frame):
 
                 # set the default text
                 self.widgets["var_" + name][index].set("pick")
-
                 self.widgets[name][index] = tk.OptionMenu(self.scroll_frame.frame,
                         self.widgets["var_" + name][index], *i['options'])
                 self.widgets[name][index].config(width=i['width'], bg="white", fg="black")
-               # self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
+                #self.widgets[name][index]["menu"].config(bg=self.bg, fg=self.fg)
+                self.widgets[name][index]["menu"].config(bg="white", fg="Black")
+
 
             elif i['widget'] == tk.Entry:
                 self.widgets[name][index] = tk.Entry(self.scroll_frame.frame, justify=tk.CENTER, bg="white", fg="black")
@@ -162,13 +172,13 @@ class StrategyFrame(tk.Frame):
         if self.widgets["var_strategy_type"][index].get() == "pick":
             message = "Error: didn't pick in Statege Type "
             open_temp_frame(self.main_interface, message, bg_color="grey")
-            self.main_interface.log_frame.add_log_message(message)
+            self.main_interface.log_in_frame.add_log_message(message)
             return
 
         #the following two parametrs help us make the window next to the paramets button
         x, y = self.widgets["Parameters"][index].winfo_rootx(), self.widgets["Parameters"][index].winfo_rooty()
 
-        self.window = tk.Toplevel(self, bg= self.bg, bd=10)
+        self.window = tk.Toplevel(self, bg=self.bg, bd=10)
         self.window.title("Parameters")
 
         #window place
@@ -188,16 +198,15 @@ class StrategyFrame(tk.Frame):
             temp_label.grid(row=row, column=0)
 
             if param['widget'] == tk.Entry:
-                entry_widget = tk.Entry(self.window, bg="white", justify=tk.CENTER, fg=self.bg,
+                entry_widget = tk.Entry(self.window, bg="white", justify=tk.CENTER, fg="Black",
                                         insertbackground="Black")
-
-
 
                 default_value = self.additional_parameters[index].get(code_name)
                 if default_value is not None:
                     entry_widget.insert(tk.END, str(default_value))
 
                 self.extra_input[code_name] = entry_widget
+                self.extra_parameters_entries.append(entry_widget)
 
             else:
                 continue
@@ -217,15 +226,21 @@ class StrategyFrame(tk.Frame):
             code_name = param['code_name']
             input_value = self.extra_input[code_name].get()
 
-            if not input_value:
-                self.additional_parameters[index][code_name] = None
-            else:
-                self.additional_parameters[index][code_name] = param['data_type'](input_value)
+            # Check if input is a valid number between 0 and 100
+            try:
+                input_number = float(input_value)
+                if not (0 <= input_number <= 100):
+                    self.main_interface.log_in_frame.add_log_message("Input value must be between 0 and 100")
+            except ValueError:
+                # Handle invalid input
+                self.main_interface.log_in_frame.add_log_message("Invalid input in extra parameters")
+                return
+
+            # Update dictionary if input is valid
+            self.additional_parameters[index][code_name] = param['data_type'](input_value)
 
         # Close the window
         self.window.destroy()
-
-
     def switch_strategy(self, index: int):
 
         for i in ["var_Contract","var_strategy_type", "var_Timeframe"]:
@@ -240,27 +255,27 @@ class StrategyFrame(tk.Frame):
                 if len(temp_list) == 3:
                     message = f"Error: didn't pick in {x.capitalize()} {y.capitalize()}"
                     open_temp_frame(self.main_interface, message, bg_color="grey" )
-                    self.main_interface.log_frame.add_log_message(message)
+                    self.main_interface.log_in_frame.add_log_message(message)
 
                 else :
                     message = f"Error: didn't pick in {x.capitalize()}"
                     open_temp_frame(self.main_interface, message,  bg_color="grey")
-                    self.main_interface.log_frame.add_log_message(message)
+                    self.main_interface.log_in_frame.add_log_message(message)
 
                 return
 
         strategy_selected = self.widgets["var_strategy_type"][index].get()
 
         #check if all peramerters are set , if not display an error message in log
-        for i in ["Balance Percentage", "Take Profit", "Stop Loss"]:
+        for i in ["balance_pct", "take_profit", "stop_loss"]:
             if self.widgets[i][index].get() == "":
-                self.main_interface.log_frame.add_log_message(f"Error: missing {i.lower()} parameter")
+                self.main_interface.log_in_frame.add_log_message(f"Error: missing {i.lower()} parameter")
                 return
 
             #loop throw extra parameters strategy to make sure the are all filed
             for i in self.extra_params_dict[strategy_selected]:
                 if self.additional_parameters[index][i['code_name']] is None:
-                    self.main_interface.log_frame.add_log_message(f"Error: missing {i['name']} parameter")
+                    self.main_interface.log_in_frame.add_log_message(f"Error: missing {i['name']} parameter")
                     return
 
         # get the information
@@ -272,9 +287,28 @@ class StrategyFrame(tk.Frame):
         print(exchange)
         timeframe = self.widgets['var_Timeframe'][index].get()
         contract = self.exchanges[exchange].contracts[symbol]
-        balance_pct = float(self.widgets['Balance Percentage'][index].get())
-        take_profit = float(self.widgets['Take Profit'][index].get())
-        stop_loss = float(self.widgets['Stop Loss'][index].get())
+        try:
+            balance_pct = float(self.widgets['balance_pct'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for balance")
+            return
+        try:
+            take_profit = float(self.widgets['take_profit'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for take profit")
+            return
+
+        try:
+            stop_loss = float(self.widgets['stop_loss'][index].get())
+        except ValueError:
+            # Handle the case where the input values cannot be converted to floats
+            self.main_interface.log_in_frame.add_log_message(
+                f"Invalid input for stop loss")
+            return
 
         # check if the button is off Or ON
         if self.widgets['Activation'][index].cget("text") == "OFF":
@@ -286,8 +320,12 @@ class StrategyFrame(tk.Frame):
                                                  take_profit, stop_loss, self.additional_parameters[index])
 
             # strategy_selected == "Breakout":
-            else:
+            elif strategy_selected == "Breakout":
                 new_strategy = BreakoutStrategy(self.exchanges[exchange], contract, exchange, timeframe, balance_pct,
+                                                take_profit, stop_loss, self.additional_parameters[index])
+
+            else:
+                new_strategy = EngulfingStrategy(self.exchanges[exchange], contract, exchange, timeframe, balance_pct,
                                                 take_profit, stop_loss, self.additional_parameters[index])
 
             # Collects historical data. It is just one API call so that is ok, but be careful not to call methods
@@ -297,7 +335,7 @@ class StrategyFrame(tk.Frame):
             new_strategy.candles = self.exchanges[exchange].get_historical_candles(contract, timeframe)
 
             if len(new_strategy.candles) == 0:
-                self.main_interface.log_frame.add_log_message(f"There is no historical data retrieved for {contract.symbol}")
+                self.main_interface.log_in_frame.add_log_message(f"There is no historical data retrieved for {contract.symbol}")
                 return
 
             if exchange == "Binance":
@@ -314,7 +352,7 @@ class StrategyFrame(tk.Frame):
                 self.widgets["Activation"][index].config(bg="green", text="ON")
 
             self.widgets['Activation'][index].config(bg="darkgreen", text="ON")
-            self.main_interface.log_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - started")
+            self.main_interface.log_in_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - started")
 
 
         else:
@@ -328,7 +366,7 @@ class StrategyFrame(tk.Frame):
                     self.widgets[name][index].config(stat=tk.NORMAL)
 
                 self.widgets["Activation"][index].config(bg="darkred", text="OFF")
-            self.main_interface.log_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - stopped")
+            self.main_interface.log_in_frame.add_log_message(f"{strategy_selected} strategy on {symbol} - stopped")
 
     def update_color(self, new_bg_color: str, new_fg_color: str):
         self.bg = new_bg_color
@@ -341,3 +379,26 @@ class StrategyFrame(tk.Frame):
 
         for i in range(len(self.all_labels)):
             self.all_labels[i].config(bg=self.bg, fg=self.fg)
+
+    def _load_workspace(self):
+
+        data = self.db.get("strategies")
+
+        for row in data:
+            self.add_strategy()
+            print(row.keys())
+            b_index = self.body_index - 1  # -1 to select the row that was just added
+
+            for base_param in self.params_dict:
+                code_name = base_param['name']
+
+                if base_param['widget'] == tk.OptionMenu and row[code_name] is not None:
+                    self.widgets["var_" + code_name][b_index].set(row[code_name])
+                elif base_param['widget'] == tk.Entry and row[code_name] is not None:
+                    self.widgets[code_name][b_index].insert(tk.END, row[code_name])
+
+            extra_params = json.loads(row['extra_params'])
+
+            for param, value in extra_params.items():
+                if value is not None:
+                    self.additional_parameters[b_index][param] = value

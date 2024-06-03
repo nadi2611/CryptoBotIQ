@@ -234,7 +234,7 @@ class BinanceClient:
             else:
                 for a in account_data['balances']:
                     balances[a['asset']] = Balance(a, self.platform)
-
+        print(f"balance is {balances}")
         return balances
 
     def place_order(self, contract: Contract, order_type: str, quantity: float, side: str, price=None, tif=None) -> OrderStatus:
@@ -381,7 +381,7 @@ class BinanceClient:
                     break
             except Exception as e:
                 logger.error("Binance error in run_forever() method: %s", e)
-            time.sleep(2)
+            time.sleep(1)
 
     def _on_open(self, ws):
         logger.info("Binance connection opened")
@@ -426,6 +426,7 @@ class BinanceClient:
         """
 
         data = json.loads(msg)
+        self.msg = msg
 
         if "u" in data and "A" in data:
             data['e'] = "bookTicker"  # For Binance Spot, to make the data structure uniform with Binance Futures
@@ -450,9 +451,17 @@ class BinanceClient:
                             for trade in strat.trades:
                                 if trade.status == "open" and trade.entry_price is not None:
                                     if trade.side == "long":
+                                        print("in long")
                                         trade.pnl = (self.prices[symbol]['bid'] - trade.entry_price) * trade.quantity
+                                        print(f"in on_message , trade.pnl={trade.pnl} ->  trade.entry_price \
+                                                   = {trade.entry_price},Current self.prices[symbol]['bid'] \
+                                                    ={self.prices[symbol]['bid']} ,trade.quantity = {trade.quantity}")
                                     elif trade.side == "short":
+                                        print("in short")
                                         trade.pnl = (trade.entry_price - self.prices[symbol]['ask']) * trade.quantity
+                                        print(f"in on_message , trade.pnl={trade.pnl} ->  trade.entry_price = {trade.entry_price},\
+                                             Current self.prices[symbol]['ask'] = {self.prices[symbol]['ask']} ,\
+                                               trade.quantity = {trade.quantity}")
                 except RuntimeError as e:  # Handles the case  the dictionary is modified while loop through it
                     logger.error("Error while looping through the Binance strategies: %s", e)
 

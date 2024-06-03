@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
-from UI.ui_watchlist import WatchList
+from UI.ui_watch_list import WatchList
+import threading
 
 FONT = ("Calibri", 12, "normal")
 
@@ -9,7 +10,7 @@ FONT = ("Calibri", 12, "normal")
 **kwargs - to pass key words arguments - like bg
 """""""""
 
-class LogFrame(tk.Frame):
+class Login(tk.Frame):
     def __init__(self, main_interface, *args, **kwargs):
         self.bg: str = kwargs.pop('bg_color')
         self.fg :str= kwargs.pop('fg_color')
@@ -34,8 +35,10 @@ class LogFrame(tk.Frame):
         self.watch_list_button.place(relx=1.0, rely=0.0, anchor=tk.NE, x=-85)
 
         self.binance = main_interface.binance
-        self.bitmex = main_interface.bitmex
         self.watch_list_opend = False
+
+        self.run_timer()
+
 
     def change_color_button(self, main_interface):
         main_interface.update_color()
@@ -73,7 +76,6 @@ class LogFrame(tk.Frame):
     def update_logs(self):
         if (self.watch_list_opend):
             self.update_exchange_logs(self.binance)
-            self.update_exchange_logs(self.bitmex)
 
             for key, value in self.watch_list.widgets['symbol'].items():
                 symbol = self.watch_list.widgets['symbol'][key].cget("text")
@@ -81,8 +83,6 @@ class LogFrame(tk.Frame):
 
                 if exchange == "Binance" and symbol in self.binance.contracts:
                     self.update_watch_list_prices(symbol, self.binance, key)
-                elif exchange == "Bitmex" and symbol in self.bitmex.contracts:
-                    self.update_watch_list_prices(symbol, self.bitmex, key)
 
             self.after(2000, self.update_logs)
 
@@ -90,7 +90,7 @@ class LogFrame(tk.Frame):
         for log in exchange_client.logs:
             if not log["displayed"]:
                 log["displayed"] = True
-                self.log_frame.add_log_message(log["log"])
+                self.log_in_frame.add_log_message(log["log"])
 
     def update_watch_list_prices(self, symbol, exchange_client, key):
         if symbol not in exchange_client.prices:
@@ -111,25 +111,20 @@ class LogFrame(tk.Frame):
     def _update_ui(self):
 
         # Logs
-        for log in self.bitmex.logs:
-            if not log['displayed']:
-                self.log_frame.add_log_message(log['log'])
-                log['displayed'] = True
-
         for log in self.binance.logs:
             if not log['displayed']:
-                self.log_frame.add_log_message(log['log'])
+                self.log_in_frame.add_log_message(log['log'])
                 log['displayed'] = True
 
         # Trades and Logs
-        for client in [self.binance, self.bitmex]:
+        for client in [self.binance]:
 
             try:  # try...except statement to handle the case when a dictionary is updated during the following loops
 
                 for b_index, strat in client.strategies.items():
                     for log in strat.logs:
                         if not log['displayed']:
-                            self.log_frame.add_log_message(log['log'])
+                            self.log_in_frame.add_log_message(log['log'])
                             log['displayed'] = True
 
                     # Update the Trades component (add a new trade, change status/PNL)
@@ -141,7 +136,7 @@ class LogFrame(tk.Frame):
                         if "binance" in trade.contract.exchange:
                             precision = trade.contract.price_decimals
                         else:
-                            precision = 8  # The Bitmex PNL is always is BTC, thus 8 decimals
+                            precision = 8
 
                         pnl_str = "{0:.{prec}f}".format(trade.pnl, prec=precision)
                         self.trade_frame.body_widgets['pnl_var'][trade.time].set(pnl_str)
@@ -149,7 +144,7 @@ class LogFrame(tk.Frame):
                         self.trade_frame.body_widgets['quantity_var'][trade.time].set(trade.quantity)
 
             except RuntimeError as e:
-                self.log_frame.add_log_message("Error while looping through strategies dictionary: %s", e)
+                self.log_in_frame.add_log_message("Error while looping through strategies dictionary: %s", e)
 
         # Watchlist prices
         try:
@@ -173,17 +168,6 @@ class LogFrame(tk.Frame):
 
                     prices = self.binance.prices[symbol]
 
-                elif exchange == "Bitmex":
-                    if symbol not in self.bitmex.contracts:
-                        continue
-
-                    if symbol not in self.bitmex.prices:
-                        continue
-
-                    precision = self.bitmex.contracts[symbol].price_decimals
-
-                    prices = self.bitmex.prices[symbol]
-
                 else:
                     continue
 
@@ -195,19 +179,17 @@ class LogFrame(tk.Frame):
                     self.watch_list.widgets['ask_var'][key].set(price_str)
 
         except RuntimeError as e:
-            self.log_frame.add_log_message("Error while looping through watchlist dictionary: %s", e)
+            self.log_in_frame.add_log_message("Error while looping through watchlist dictionary: %s", e)
 
         self.after(1500, self._update_ui)
 
     def open_temp_frame(self, main_interface: tk.Frame, on_close=None):
         def on_window_close():
-            main_interface.log_frame.watch_list_button.config(stat=tk.NORMAL)
+            main_interface.log_in_frame.watch_list_button.config(stat=tk.NORMAL)
             self.watch_list_opend = False
             if on_close:
                 on_close()
             window.destroy()
-
-
 
         window = tk.Toplevel(main_interface)
         window.config(bg=self.bg)
@@ -216,9 +198,29 @@ class LogFrame(tk.Frame):
         window.resizable(width=False, height=False)
 
         self.watch_list = WatchList(window, binance_contracts=self.binance.contracts,
-                                    bitmex_contracts=self.bitmex.contracts, bg_color=self.bg,
+                                   bg_color=self.bg,
                                     fg_color=self.fg)
         self.watch_list.grid(row=0, column=0, sticky="nsew")
         self.watch_list.lift()  # Raise the WatchList widget to the top
 
         self.update_logs()
+
+    def run_timer(self):
+
+        self.timer = threading.Timer(10, self.run_timer)
+        self.timer.start()
+        if self.watch_list_opend:
+            # Call your function
+            self.save_workspace()
+
+    def save_workspace(self):
+        watchlist_symbols = []
+
+        for key, value in self.watch_list.widgets['symbol'].items():
+            symbol = value.cget("text")
+            exchange = self.watch_list.widgets['exchange'][key].cget("text")
+
+            watchlist_symbols.append((symbol, exchange,))
+
+        self.watch_list.db.save("watchlist", watchlist_symbols)
+

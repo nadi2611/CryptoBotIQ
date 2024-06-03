@@ -1,29 +1,23 @@
 import logging
 from typing import *
 import time
-
 from threading import Timer
-
 import pandas as pd
-
 from models import *
 
 if TYPE_CHECKING:  # Import the connector class names only for typing purpose (the classes aren't actually imported)
-    from connectors.bitmex import BitmexClient
-    from connectors.binance import BinanceClient
+    from binance import BinanceClient
 
 logger = logging.getLogger()
 
 # TF_EQUIV is used in parse_trades() to compare the last candle timestamp to the new trade timestamp
-TF_EQUIV = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600, "4h": 14400}
-
+TF_EQUIV = {"1m": 60, "3m": 180, "5m": 300, "15m": 900, "30m": 1800, "1h": 3600,"2h": 7200 ,"4h": 14400}
 
 class Strategy:
-    def __init__(self, client: Union["BitmexClient", "BinanceClient"], contract: Contract, exchange: str,
+    def __init__(self, client: Union["BinanceClient"], contract: Contract, exchange: str,
                  timeframe: str, balance_pct: float, take_profit: float, stop_loss: float, strat_name):
 
         self.client = client
-
         self.contract = contract
         self.exchange = exchange
         self.tf = timeframe
@@ -201,6 +195,7 @@ class Strategy:
         price = self.candles[-1].close
 
         if trade.side == "long":
+            price = self.client.prices[self.contract.symbol]['bid']
             if self.stop_loss is not None:
                 if price <= trade.entry_price * (1 - self.stop_loss / 100):
                     sl_triggered = True
@@ -209,6 +204,7 @@ class Strategy:
                     tp_triggered = True
 
         elif trade.side == "short":
+            price = self.client.prices[self.contract.symbol]['ask']
             if self.stop_loss is not None:
                 if price >= trade.entry_price * (1 + self.stop_loss / 100):
                     sl_triggered = True
@@ -233,8 +229,11 @@ class Strategy:
             order_status = self.client.place_order(self.contract, "MARKET", trade.quantity, order_side)
 
             if order_status is not None:
+                #self.update_pnl(trade, price)
                 self._add_log(f"Exit order on {self.contract.symbol} {self.tf} placed successfully")
                 trade.status = "closed"
+                print(f"hi , trade.pnl={trade.pnl}, trade.entry_price = {trade.entry_price},\
+                     Current Price = {price} ,  trade.quantity = {trade.quantity},quantity_decimals= {trade.contract.quantity_decimals}")
                 self.ongoing_position = False
 
 
@@ -298,6 +297,10 @@ class TechnicalStrategy(Strategy):
         macd_line = ema_fast - ema_slow
         macd_signal = macd_line.ewm(span=self._ema_signal).mean()
 
+        print(f"ema_fast is {ema_fast}")
+        print(f"ema_slow is {ema_slow}")
+        print(f"macd_line is {macd_line}")
+        print(f"macd_signal is {macd_signal}")
         return macd_line.iloc[-2], macd_signal.iloc[-2]
 
     def _check_signal(self):
@@ -339,7 +342,7 @@ class BreakoutStrategy(Strategy):
                  stop_loss: float, other_params: Dict):
         super().__init__(client, contract, exchange, timeframe, balance_pct, take_profit, stop_loss, "Breakout")
 
-        self._min_volume = other_params['min_volume']
+        self._min_volume = other_params['Minimum Volume']
 
     def _check_signal(self) -> int:
 
@@ -369,13 +372,44 @@ class BreakoutStrategy(Strategy):
             if signal_result in [1, -1]:
                 self._open_position(signal_result)
 
+class EngulfingStrategy(Strategy):
+    def __init__(self, client, contract: Contract, exchange: str, timeframe: str, balance_pct: float, take_profit: float,
+                 stop_loss: float, other_params: Dict):
+        super().__init__(client, contract, exchange, timeframe, balance_pct, take_profit, stop_loss, "Engulfing")
+
+        self._min_volume = other_params['Minimum Volume']
+
+    def _check_signal(self) -> int:
+        if self.candles[-1].high > self.candles[-2].high and self.candles[-1].low < self.candles[-2].low\
+            and self.candles[-2].open > self.candles[-2].close and self.candles[-1].close > self.candles[-1].open\
+            and self.candles[-1].open < self.candles[-2].close and self.candles[-1].close > self.candles[-2].open\
+            and self.candles[-1].volume > self._min_volume:
+            return 1
 
 
+        elif (self.candles[-1].high > self.candles[-2].high and self.candles[-1].low < self.candles[-2].low\
+                and self.candles[-2].open < self.candles[-2].close and self.candles[-1].close < self.candles[-1].open \
+                and self.candles[-1].close < self.candles[-2].open and self.candles[-1].open > self.candles[-2].close \
+                and self.candles[-1].volume > self._min_volume):
+            return -1
+        else:
+            return 0
 
+    def check_trade(self, tick_type: str):
+        if not self.ongoing_position:
+            signal_result = self._check_signal()
 
+            if signal_result in [1, -1]:
+                self._open_position(signal_result)
 
-
-
-
-
-
+    def update_pnl(self, trade , current_price ):
+        if trade.side == "long":
+            print("in long")
+            trade.pnl = (current_price- trade.entry_price) * trade.quantity
+            print(f"in update_pnl , trade.pnl={trade.pnl} ->  trade.entry_price = {trade.entry_price} \
+                current_price= {current_price},trade.quantity = {trade.quantity}")
+        elif trade.side == "short":
+            print("in short")
+            trade.pnl = (trade.entry_price - current_price) * trade.quantity
+            print(f"in update_pnl , trade.pnl={trade.pnl} ->  trade.entry_price = {trade.entry_price} \
+                current_price= {current_price},trade.quantity = {trade.quantity}")
